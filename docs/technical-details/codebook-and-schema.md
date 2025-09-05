@@ -18,7 +18,7 @@ Defines global codebook info:
 
 ```yaml
 metadata:
-  version: "0.01"         # 🏷️ version
+  version: "0.02"         # 🏷️ version
   local_version: "CNAG-2025.09.05"  #  🏷️  internal/project revision (optional)
   author: "M. Rueda"      # 👤 author
   center: "CNAG"          # 🏢 institution

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.org/schemas/clarid-codebook.schema.json",
-  "schemaVersion": "0.01",
+  "schemaVersion": "0.02",
   "title": "ClarID Codebook Schema",
   "type": "object",
   "required": ["metadata", "entities"],

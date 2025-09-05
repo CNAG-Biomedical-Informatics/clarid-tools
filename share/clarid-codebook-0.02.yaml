@@ -23,7 +23,7 @@
 # -----------------------------------------------------------------------------
 
 metadata:
-  version:       "0.01"                # official ClarID release
+  version:       "0.02"                # official ClarID release
   local_version: "CNAG-2025.09.05"     # internal/project revision (optional)
   author:        "Manuel Rueda <manuel.rueda@cnag.eu>"
   center:        "CNAG"
