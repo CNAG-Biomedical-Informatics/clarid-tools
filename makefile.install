@@ -1,0 +1,11 @@
+#!/usr/bin/env make
+
+SHELL := /bin/bash
+
+install:
+	sudo apt-get update
+	sudo apt-get install gcc make cpanminus libperl-dev qrencode zbar-tools
+	cpanm --notest --installdeps .	
+
+test:
+	prove -l

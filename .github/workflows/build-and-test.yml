@@ -1,0 +1,61 @@
+name: Build and test
+
+on:
+  workflow_dispatch
+  # Uncomment or modify these lines according to your needs
+  # push:
+  #   branches: 'main'
+  # pull_request:
+  #   branches: '*'
+  # schedule:
+  #   - cron: '42 5 * * 0'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest']
+        #os: ['ubuntu-latest', 'macos-14']
+        perl: ['5.42', '5.40', '5.38', '5.36', '5.34', '5.32']
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qrencode zbar-tools
+
+      - name: Install dependencies on macOS
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          brew install qrencode zbar
+          #mkdir ~/lib
+          #ln -s $(brew --prefix zbar)/lib/libzbar.dylib ~/lib/libzbar.dylib
+
+      - name: Set up Perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+
+      - run: perl -V
+
+      - name: Install Perl dependencies
+        run: |
+          cpanm -n --installdeps .
+
+      - name: Execute Perl tests
+        run: |
+          prove -l t
+
+      - name: Run tests (with coverage)
+        if: ${{ matrix.perl == '5.38' && matrix.os == 'ubuntu-latest' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          perl Makefile.PL
+          cpanm -n Devel::Cover::Report::Coveralls
+          cover -test -report Coveralls
