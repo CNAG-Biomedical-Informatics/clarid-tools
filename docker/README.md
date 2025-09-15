@@ -1,6 +1,6 @@
 # Containerized Installation
 
-### Method 3: Installing from Docker Hub
+### Method 3: Installing from Docker Hub (fast)
 
 Pull the latest Docker image from [Docker Hub](https://hub.docker.com/r/manuelrueda/clarid-tools):
 
@@ -9,7 +9,7 @@ docker pull manuelrueda/clarid-tools:latest
 docker image tag manuelrueda/clarid-tools:latest cnag/clarid-tools:latest
 ```
 
-### Method 4: Installing from Dockerfile
+### Method 4: Installing from Dockerfile (slow)
 
 Download the `Dockerfile` from [GitHub](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/Dockerfile):
 

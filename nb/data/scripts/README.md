@@ -63,6 +63,8 @@ Many pipelines need a normalized “duration/timepoint” field. This script sup
 - **Allowed units:** Days (`D`), Weeks (`W`), Months (`M` ≈ 30 days), Years (`Y` ≈ 365 days)
 - **Allowed digits:** `0–9` (values >9 in a unit are escalated to a larger unit; years are clamped to `P9Y`)
 
+> Note: The 3-character limit (PnU) is intentional, designed to keep timepoint duration compact and consistent, rather than attempting to represent every possible duration in full detail.
+
 ### Assumptions
 
 - The **input column is in days** (integer or numeric string). This keeps the logic predictable and easy to prepare (you can convert anything to days in Excel/R/Python beforehand).

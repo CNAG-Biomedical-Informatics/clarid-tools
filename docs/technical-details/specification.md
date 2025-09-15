@@ -19,6 +19,8 @@
 | 10 | Batch (opt) | `batch`                     | integer→str  | `B%02d` (e.g. `B01`)                                        | `batch_pattern`                            |
 | 11 | Replicate (opt) | `replicate`             | integer→str  | `R%02d` (e.g. `R05`)                                        | `replicate_pattern`                        |
 
+> Note (`duration`): The 3-character limit (PnU) is intentional, designed to keep timepoint duration compact and consistent, rather than attempting to represent every possible duration in full detail [isee duration binning](./pre-processing-script.md#duration-binning-days-iso8601-pnu).
+
 ### Stub format  
 **Delimiter:** _(none)_
 
