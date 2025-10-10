@@ -62,6 +62,10 @@
 
 ## General 
 
+??? question "What are the benefits of ClarID for biomedical research?"
+
+    ClarID is particularly useful in biomedicine because it fills the gap between rich metadata schemas and traditional opaque accession numbers. The structured identifiers enhance traceability and facilitate downstream data analysis by embedding important context directly into the ID. 
+
 ??? question "How do I cite `clarid-tools`?"
 
     You can cite the **Clarid-Tools** paper. Thx!
