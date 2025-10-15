@@ -66,6 +66,8 @@
 
     ClarID is particularly useful in biomedicine because it fills the gap between rich metadata schemas and traditional opaque accession numbers. The structured identifiers enhance traceability and facilitate downstream data analysis by embedding important context directly into the ID. 
 
+    ##### last change 2025-10-14 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
+
 ??? question "How do I cite `clarid-tools`?"
 
     You can cite the **Clarid-Tools** paper. Thx!
@@ -73,3 +75,4 @@
     !!! Note "Citation"
         Manuel Ruedan and Ivo G. Gut (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Submitted_.
 
+    ##### last change 2025-08-10 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)

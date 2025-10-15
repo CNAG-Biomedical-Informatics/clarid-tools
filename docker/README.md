@@ -56,13 +56,9 @@ clarid-tools
 
 - OS/ARCH supported: **linux/amd64** and **linux/arm64**.
 - Ideally a Debian-based distribution (Ubuntu or Mint), but any other (e.g., CentOS, OpenSUSE) should do as well (untested).
-- Perl 5 (>= 5.36 core; installed by default in many Linux distributions). Check the version with `perl -v`
 - 1GB of RAM
 - \>= 1 core (ideally i7 or Xeon).
 - At least 5GB HDD.
-
-## Platform Compatibility
-This distribution is written in pure Perl and is intended to run on any platform supported by Perl 5. It has been tested on Debian Linux and macOS. It is expected to work on Windows; please report any issues.
 
 ## Common errors: Symptoms and treatment
 
