@@ -14,7 +14,7 @@ RUN apt-get update && \
 
 # Download Convert-Pheno
 WORKDIR /usr/share/
-RUN git clone https://github.com/mrueda/clarid-tools.git
+RUN git clone https://github.com/CNAG-Biomedical-Informatics/clarid-tools.git
 
 # Remove the .git folder to save space and avoid shipping VCS data
 RUN rm -rf clarid-tools/.git
