@@ -12,10 +12,10 @@ All files were extracted to the `nb/data/biosample` directory:
 
 ```bash
 cd nb/data/biosample
-tar -xvf clinical.cohort.2025-06-02.tar.gz
+tar -xvf biospecimen.project-target-aml.2025-06-29.tar.gz
 ```
 
-The archive included the following four TSV files:
+The archive included the following five TSV files:
 
 - `aliquot.tsv`
 - `analyte.tsv`
@@ -38,11 +38,11 @@ gzip *.tsv
 
 ## Data Pre-processing
 
-We pre-processed the data using the script `../../tools/csv/csv2_clarid_in.py`, along with a column mapping file:
+We pre-processed the data using the script `../../../tools/csv/csv2_clarid_in.py`, along with a column mapping file:
 
 ??? example "View Mapping File"
     ```yaml
-    --8<-- "../../tools/csv/gdc_biosample_mapping.yaml"
+    --8<-- "../tools/csv/gdc_biosample_mapping.yaml"
     ```
 
 Run the pre-processing with:
@@ -55,11 +55,11 @@ Run the pre-processing with:
      ```
 
 ```bash
-../../tools/csv/csv2_clarid_in.py \
+../../../tools/csv/csv2_clarid_in.py \
     --entity biosample \
     -i sample.tsv.gz \
     -o sample_in.csv.gz \
-    --mapping ../../tools/csv/gdc_biosample_mapping.yaml
+    --mapping ../../../tools/csv/gdc_biosample_mapping.yaml
 ```
 
 ---
@@ -126,4 +126,3 @@ Below is an interactive table of the `human` format encodings. You can search (e
 <div class="datatable" markdown="1">
 {{ read_csv('nb/data/biosample/clarid_human.csv.gz') }}
 </div>
-

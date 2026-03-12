@@ -28,8 +28,8 @@ metadata:
 ```
 
 ??? Note "About Codebook Version"
-    The codebook and the ClarID-Tools software are versioned in sync.  
-    Each software release is supposed to include the corresponding version of the codebook.
+    The codebook, specification, and ClarID-Tools software are versioned in sync.
+    Each software release is expected to include the corresponding codebook version.
 
 ---
 

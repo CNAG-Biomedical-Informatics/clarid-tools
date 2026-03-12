@@ -62,7 +62,7 @@ markdown_extensions:
         pygments_lang_class: true
     - pymdownx.inlinehilite
     - pymdownx.snippets:
-        base_path: ["docs", "non-containerized", "docker", "ex", "share", "nb"]
+        base_path: ["docs", "non-containerized", "docker", "ex", "share", "nb", "tools"]
         url_download: true
     - pymdownx.superfences:
         custom_fences:

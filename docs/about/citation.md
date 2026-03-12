@@ -1,7 +1,7 @@
 # Citation for ClarID-Tools
 
 !!! Abstract "Citation"
-    Rueda, M., Gut, G.I., (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Submitted_.
+    Rueda, M., Gut, G.I. (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Submitted_.
 
 !!! Success "Funding agencies"
     * This project has received funding from the Innovative Medicines Initiative 2 Joint Undertaking (JU) under grant agreement No 831434 (3TR). The JU receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA. 

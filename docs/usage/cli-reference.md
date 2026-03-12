@@ -1,8 +1,21 @@
-**Clarid-Tools** has 3 subcommands:
+**ClarID-Tools** has 3 subcommands:
 
 `code`, `qrcode` and `validate`.
 
 ---
+
+## Quick examples
+
+```bash
+# Encode one biosample in human format
+clarid-tools code --entity biosample --format human --action encode --codebook share/clarid-codebook.yaml --project TCGA-AML --species Human --subject_id 42 --tissue Liver --sample_type Tumor --assay RNA_seq --condition C15.3 --timepoint Treatment --duration P1M
+
+# Validate a codebook
+clarid-tools validate --codebook share/clarid-codebook.yaml
+
+# Generate QR codes from a CSV file
+clarid-tools qrcode --action encode --input ex/biosample_to_decode.csv --outdir qrcodes_dir
+```
 
 ## 📦 `clarid-tools code` Options
 
@@ -51,7 +64,7 @@ clarid-tools [-h] [long options ...]
   Bulk input CSV/TSV
 
 - `--max_conditions`: Int
-   Maximum number of ICD-10 codes allowed
+  Maximum number of ICD-10 codes allowed
 
 - `--outfile`: *String*  
   Bulk output file
@@ -101,6 +114,12 @@ clarid-tools [-h] [long options ...]
 - `--usage`, `-h`, `--help`, `--man`:  
   Show help messages or manual
 
+Example:
+
+```bash
+clarid-tools code --entity subject --format stub --action decode --codebook share/clarid-codebook.yaml --stub_id COPDStudy0G9C3Of01MA4
+```
+
 
 ## 🔍 `clarid-tools validate` Options
 
@@ -119,6 +138,12 @@ clarid-tools validate [-h] [long options ...]
 
 - `--usage`, `-h`, `--help`, `--man`:  
   Show help messages or manual
+
+Example:
+
+```bash
+clarid-tools validate --codebook share/clarid-codebook.yaml
+```
 
 
 ## 🔳 `clarid-tools qrcode` Options
@@ -150,3 +175,9 @@ clarid-tools qrcode [-h] [long options ...]
 
 - `--usage`, `-h`, `--help`, `--man`:  
   Show help messages or manual
+
+Example:
+
+```bash
+clarid-tools qrcode --action decode --input qrcodes_dir --outfile decoded.csv --column clar_id
+```

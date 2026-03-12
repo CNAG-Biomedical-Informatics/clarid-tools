@@ -42,7 +42,7 @@ git clone https://github.com/CNAG-Biomedical-Informatics/clarid-tools.git
 cd clarid-tools
 ```
 
-If you only new to update to the lastest version do:
+If you only need to update to the latest version, do:
 
 ```bash
 git pull
