@@ -46,7 +46,7 @@
 
 ??? question "For `condition` do I need to encode to ICD-10 before ClarID-Tools?"
 
-    Yes, ClarID-Tools reads ICD-10 diagnosis codes. Take a look at [this documentation](../technical-details/pre-processing-script.md).
+    Yes, ClarID-Tools reads ICD-10 diagnosis codes. Take a look at the [pre-processing documentation](../technical-details/pre-processing-script.md).
 
     ##### last change 2025-07-21 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
 

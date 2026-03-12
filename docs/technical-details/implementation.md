@@ -107,6 +107,11 @@ The `human` and `stub` formats are fully interoperable but serve different purpo
 !!! warning "Condition ordering and versioning"
     Stub `condition` values depend on the ICD-10 ordering distributed with the reference implementation. In practice, encoded values should be interpreted together with the ClarID-Tools release and associated resources used for encoding. Keep the codebook and packaged mapping files under version control. Future revisions may revisit this mapping strategy if broader interoperability needs emerge.
 
+??? info "ICD-10 mapping resources"
+    The current reference implementation uses packaged ICD-10 mapping resources. The details below document the source material and how the packaged mapping files were generated.
+
+    --8<-- "../share/README_ICD10.md"
+
 ### `species`
 - `stub_code` declared in the YAML codebook as a 2-character code (Base62 alphabet).  
 - One code (e.g., `00`) reserved for unknown.  
