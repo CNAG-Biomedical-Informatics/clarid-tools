@@ -113,12 +113,35 @@ The `human` and `stub` formats are fully interoperable but serve different purpo
     --8<-- "../share/README_ICD10.md"
 
 ### `species`
-- `stub_code` declared in the YAML codebook as a 2-character code (Base62 alphabet).  
+- `stub_code` declared in the YAML codebook as a codebook-defined species stub.  
+- Species stub width is defined by the codebook and must be consistent within a given codebook.  
 - One code (e.g., `00`) reserved for unknown.  
 - Optional `tax_code` is kept for traceability (not used in stubs).
 
 !!! note "Species capacity"
-    The current stub design supports up to 3,844 species codes with a 2-character Base62 space. This is typically sufficient for biomedical metadata integration. If your project exceeds that range, use the human-readable format or adopt an extended stub specification for your deployment.
+    The reference codebook uses a 2-character Base62 space, which supports up to 3,844 species codes. A 3-character Base62 space supports up to 238,328 species codes. If a project needs a larger species space, it can use longer `species.stub_code` values in the codebook, provided that the species stub width remains consistent within that codebook.
+
+!!! note "Alternative species encodings"
+    ClarID-Tools does not impose a runtime encoding algorithm for `species`. The reference codebook uses a Base62-style convention, but other species-stub encodings are possible if they better fit a project's needs, provided that the chosen stub width remains consistent within the codebook.
+
+??? example "Illustrative Base62 generation for species stub codes"
+    This example shows how a 2-character Base62 space can be generated for assigning `species.stub_code` values in the reference codebook.
+
+    ClarID-Tools does **not** perform this conversion at runtime. In the current implementation, `species` stub values are read directly from the YAML codebook.
+
+    ```python
+    #!/usr/bin/env python3
+    ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    BASE = len(ALPHABET)
+    MAX_VALUE = BASE ** 2
+
+    def encode_base62(num: int) -> str:
+        if not (0 <= num < MAX_VALUE):
+            raise ValueError(f'Number out of range (0 <= num < {MAX_VALUE}), got {num}')
+        high = num // BASE
+        low = num % BASE
+        return ALPHABET[high] + ALPHABET[low]
+    ```
 
 ### `tissue`, `sample_type`, `assay`
 - Use **predefined stub_codes** from the codebook (recommended 2–5 chars).  

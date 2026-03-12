@@ -1,4 +1,9 @@
-Revision history for Perl distribution Pheno-Ranker
+Revision history for ClarID-Tools
+
+0.03 2025-0X-XXT00:00:00Z (Manuel Rueda <mrueda@cpan.org>)
+
+ - Moved csv pre-processing scripts from nb/data/scripts to tools/csv. Updated nb/*py accordingly
+ - Updated 'code.pm' (and tests) to allow for alternative encodings for field 'species'
 
 0.02 2025-09-05T00:00:00Z (Manuel Rueda <mrueda@cpan.org>)
 

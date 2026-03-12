@@ -872,9 +872,11 @@ sub _decode_stub_biosample {
     }
     croak "Unknown project stub" unless defined $project;
 
-    # 6) species (always 2 chars)
-    my $spec_stub = substr( $head, 0, 2 );
-    substr( $head, 0, 2 ) = '';
+    # 6) species (fixed width inferred from codebook)
+    my $spec_w = _species_stub_width( $cb->{species} );
+    croak "Stub too short to contain species" unless length($head) >= $spec_w;
+    my $spec_stub = substr( $head, 0, $spec_w );
+    substr( $head, 0, $spec_w ) = '';
     my %sp_by = map { $cb->{species}{$_}{stub_code} => $_ }
       keys %{ $cb->{species} };
     croak "Unknown species stub '$spec_stub'" unless exists $sp_by{$spec_stub};
@@ -1254,6 +1256,26 @@ sub _format_icd10 {
     return substr( $code, 0, 3 ) . '.' . substr( $code, 3 );
 }
 
+sub _species_stub_width {
+    my ($species_map) = @_;
+    croak "Missing species codebook section"
+      unless $species_map && ref $species_map eq 'HASH' && %{$species_map};
+
+    my %widths;
+    for my $key ( keys %{$species_map} ) {
+        next if $key eq 'Not Available';
+        my $stub = $species_map->{$key}{stub_code};
+        croak "Missing species stub_code for '$key'"
+          unless defined $stub && length $stub;
+        $widths{ length $stub } = 1;
+    }
+
+    croak "Species stub_code values must all have the same length"
+      unless keys(%widths) == 1;
+
+    return ( keys %widths )[0];
+}
+
 sub _apply_defaults {
     my ($doc)    = @_;
     my $ents     = $doc->{entities} or return;
@@ -1298,4 +1320,3 @@ sub _strip_tail_using_fmt {
 }
 
 1;
-

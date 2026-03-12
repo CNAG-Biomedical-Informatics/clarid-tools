@@ -30,7 +30,7 @@
 | #  | Component      | Source field                | Type            | Pattern / Format                       | Built from                                |
 |---:|----------------|-----------------------------|-----------------|-----------------------------------------|--------------------------------------------|
 | 1  | Project stub   | `project.stub_code`         | string          | free string                            | codebook value                             |
-| 2  | Species stub   | `species.stub_code`         | string          |  2-char codebook stub (Base62 alphabet) | codebook value                             |
+| 2  | Species stub   | `species.stub_code`         | string          | codebook-defined stub width (Base62 alphabet recommended) | codebook value                  |
 | 3  | Subject stub   | `subject_id`                | integer→Base62 | width 3 (default) — max 238,327        | 3-char Base62 from integer             |
 | 4  | Tissue stub    | `tissue.stub_code`          | string          | 1–3 chars                              | codebook value                             |
 | 5  | Sample Type stub | `sample_type.stub_code`   | string          | 1–3 chars                              | codebook value                             |
@@ -41,7 +41,9 @@
 | 10 | Batch stub (opt) | `batch`                  | integer         |  `B%02d` (e.g. `B01`)                     | `batch_pattern`                            |
 | 11 | Replicate stub (opt) | `replicate`         | integer         | `R%02d` (e.g. `R05`)                       | `replicate_pattern`                        |
 
-> Note (`species` + `subject_id`): in stub format these fields are encoded independently. `species` uses a static 2-character codebook `stub_code`, whereas `subject_id` is converted from the numeric subject identifier into fixed-width Base62. They are therefore compact counterparts of the same metadata, but not character-by-character transformations of the human-readable fields.
+> Note (`species` + `subject_id`): in stub format these fields are encoded independently. `species` uses a static codebook `stub_code`, whereas `subject_id` is converted from the numeric subject identifier into fixed-width Base62. They are therefore compact counterparts of the same metadata, but not character-by-character transformations of the human-readable fields.
+
+> Note (`species` width): species stub width is defined by the codebook and should be consistent within a given codebook. The reference codebook uses width 2.
 
 > Note (`condition` mapping): the numeric mapping used for stub `condition` values depends on the packaged ICD-10 order map distributed with the reference implementation. In practice, condition stubs should be interpreted together with the ClarID-Tools release and associated resources used for encoding. Future revisions may revisit this mapping strategy if broader interoperability needs emerge.
 

@@ -2,38 +2,6 @@
 
 ## Codebook
 
-??? Example "How do you perform the Base62 encoding for `species`"
-
-    Below is a small Python example that generates the 2-character Base62 encoding space used for `species`.
-
-    ```python
-     #!/usr/bin/env python3
-    import sys
-
-    ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-    BASE = len(ALPHABET)  # 62
-    MAX_VALUE = BASE ** 2  # 3844
-
-    def encode_base62(num: int) -> str:
-        """
-        Encode an integer in the range [0, 3843] to a 2-character Base62 string.
-        """
-        if not (0 <= num < MAX_VALUE):
-            raise ValueError(f'Number out of range (0 ≤ num < {MAX_VALUE}), got {num}')
-        high = num // BASE
-        low = num % BASE
-        return ALPHABET[high] + ALPHABET[low]
-
-    def main():
-        for n in range(MAX_VALUE):
-            print(f'{n}\t{encode_base62(n)}')
-
-    if __name__ == '__main__':
-        main()
-    ```
-
-    ##### last change 2025-08-01 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
-
 ??? question "Why do the `species` and `subject_id` parts of stub IDs not look like the human-readable version?"
 
     Because they are encoded independently for compactness.
