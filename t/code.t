@@ -27,8 +27,12 @@ sub _temp_codebook {
     my ($mutator) = @_;
     my $doc = LoadFile($codebook);
     $mutator->($doc);
-    my ( $fh, $path ) = tempfile( 'clarid-codebook-XXXX', SUFFIX => '.yaml' );
-    close $fh;
+    my ( $fh, $path ) = tempfile(
+        'clarid-codebook-XXXX',
+        SUFFIX => '.yaml',
+        DIR    => 't',
+        UNLINK => 1,
+    );
     DumpFile( $path, $doc );
     return $path;
 }

@@ -290,7 +290,7 @@ def main():
             sys.exit(f"ERROR: Missing columns: {missing}")
 
         with open_output(args.output) as outfile:
-            writer = csv.writer(outfile)
+            writer = csv.writer(outfile, lineterminator='\n')
             writer.writerow(out_headers)
 
             counter = 0
