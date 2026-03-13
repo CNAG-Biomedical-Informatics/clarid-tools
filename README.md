@@ -37,7 +37,7 @@
 
 ## 📝 Description
 
-**ClarID-Tools** is a flexible, schema-driven toolkit for generating and parsing structured identifiers for **subject** and **biosample** data. The objective is to standardize how subject and biosample metadata are encoded into compact, informative IDs for downstream integration and tracking.
+**ClarID-Tools** is a toolkit for working with the **ClarID** specification, including the reference command-line implementation, preprocessing utilities, and example workflows. The objective is to standardize how subject and biosample metadata are transformed into compact, informative IDs for downstream integration, tracking, and exchange.
 
 ---
 

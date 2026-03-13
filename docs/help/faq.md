@@ -63,17 +63,6 @@
 
     Use `stub` format when you need a compact identifier for labels, QR codes, filenames, or systems with tighter space constraints.
 
-??? question "What if my project needs more species than the current stub format allows?"
-
-    The current 2-character Base62 `species` stub design supports up to 3,844 values. This is typically sufficient for biomedical metadata integration, which is the primary target of ClarID-Tools.
-
-    If your project exceeds that range, the recommended options are:
-
-    * use the human-readable format
-    * adopt an extended stub specification for your project
-
-    A wider `species` stub field is a specification-level change, not just a codebook update, because it affects interoperability.
-
 ??? question "Why do I see duplicated columns after decoding a CSV file?"
 
     In bulk decode mode, ClarID-Tools appends decoded fields to the right of the existing input table. If the source table already contains some of those columns, they will appear duplicated in the output.
@@ -98,12 +87,6 @@
 
 ## General
 
-??? question "What are the benefits of ClarID for biomedical research?"
-
-    ClarID is particularly useful in biomedicine because it fills the gap between rich metadata schemas and traditional opaque accession numbers. The structured identifiers enhance traceability and facilitate downstream data analysis by embedding important context directly into the ID. 
-
-    ##### last change 2025-10-14 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
-
 ??? question "How do I cite `clarid-tools`?"
 
     You can cite the **ClarID-Tools** paper.
@@ -112,7 +95,3 @@
         Manuel Rueda and Ivo G. Gut (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Submitted_.
 
     ##### last change 2025-08-10 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
-
-??? question "Should the documentation be updated when the paper goes live?"
-
-    Yes. The citation string should be updated consistently across the documentation site, the repository `README`, and any notebooks or example material released with the paper.
