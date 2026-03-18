@@ -38,11 +38,11 @@ gzip *.tsv
 
 ## Data Pre-processing
 
-We pre-processed the data using the script `../../../tools/csv/csv2_clarid_in.py`, along with a column mapping file:
+We pre-processed the data using the script `../../../utils/csv/csv2_clarid_in.py`, along with a column mapping file:
 
 ??? example "View Mapping File"
     ```yaml
-    --8<-- "../tools/csv/gdc_biosample_mapping.yaml"
+    --8<-- "../utils/csv/gdc_biosample_mapping.yaml"
     ```
 
 Run the pre-processing with:
@@ -55,11 +55,11 @@ Run the pre-processing with:
      ```
 
 ```bash
-../../../tools/csv/csv2_clarid_in.py \
+../../../utils/csv/csv2_clarid_in.py \
     --entity biosample \
     -i sample.tsv.gz \
     -o sample_in.csv.gz \
-    --mapping ../../../tools/csv/gdc_biosample_mapping.yaml
+    --mapping ../../../utils/csv/gdc_biosample_mapping.yaml
 ```
 
 ---
