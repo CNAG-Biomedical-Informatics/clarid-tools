@@ -417,8 +417,16 @@ sub _run_bulk {
     my ( $self, $in_fh, $sep, $out_fh, $code2name ) = @_;
     $sep ||= ',';
 
-    # set up CSV parser
+    # set up CSV parser/writer
     my $csv = Text::CSV_XS->new( { sep_char => $sep } );
+    my $csv_out = Text::CSV_XS->new(
+        {
+            sep_char => $sep,
+            binary   => 1,
+            eol      => "\n",
+        }
+    );
+    croak "Failed to initialize CSV writer" unless $csv_out;
 
     # read header row and set column names
     my $hdr = $csv->getline($in_fh)
@@ -434,12 +442,14 @@ sub _run_bulk {
     # write output header
     if ( $self->action eq 'encode' ) {
         my $label = $self->format eq 'stub' ? 'stub_id' : 'clar_id';
-        say $out_fh join( $sep, ( @$hdr, $label ) );
+        $csv_out->print( $out_fh, [ @$hdr, $label ] )
+          or croak "Failed to write output header: " . $csv_out->error_diag;
     }
     else {
         my @cols = ( @$hdr, $self->_decode_fields );
         push @cols, 'condition_name' if $self->with_condition_name;
-        say $out_fh join( $sep, @cols );
+        $csv_out->print( $out_fh, \@cols )
+          or croak "Failed to write output header: " . $csv_out->error_diag;
     }
 
     # process each row
@@ -472,7 +482,8 @@ sub _run_bulk {
             my @args = map { $row->{$_} } $self->_encode_fields;
             my $meth = sprintf '_encode_%s_%s', $self->format, $self->entity;
             my $out  = $self->$meth( $cb, @args );
-            say $out_fh join( $sep, ( map { $row->{$_} // '' } @$hdr ), $out );
+            $csv_out->print( $out_fh, [ ( map { $row->{$_} // '' } @$hdr ), $out ] )
+              or croak "Failed to write output row: " . $csv_out->error_diag;
         }
         else {
             # enforce column based on --format
@@ -501,7 +512,8 @@ sub _run_bulk {
                 push @out, join( ';', @names );
             }
 
-            say $out_fh join( $sep, ( map { $row->{$_} // '' } @$hdr ), @out );
+            $csv_out->print( $out_fh, [ ( map { $row->{$_} // '' } @$hdr ), @out ] )
+              or croak "Failed to write output row: " . $csv_out->error_diag;
         }
     }
 
