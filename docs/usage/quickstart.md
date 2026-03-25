@@ -1,5 +1,13 @@
 Let's start encoding and decoding right away!
 
+## Before You Run The Examples
+
+- If you cloned this repository, run the examples from the repository root with `bin/clarid-tools`.
+- If you installed ClarID-Tools outside the repository, replace `bin/clarid-tools` with `clarid-tools`.
+- The examples below show `--codebook share/clarid-codebook.yaml` for clarity, but the packaged default codebook is used automatically unless you override it.
+- `condition` values must already be normalized to ICD-10 before encoding.
+- `qrcode` mode needs `qrencode` for QR generation and `zbarimg` for QR decoding when running on the host. The Docker image already includes both tools.
+
 === "`code` mode"
 
     ## Biosample
@@ -272,7 +280,7 @@ Let's start encoding and decoding right away!
 
     ## Biosample
 
-    Now we convert all `clarid_id` records in `ex/biosample_to_decode.csv`:
+    Now we convert all `clar_id` records in `ex/biosample_to_decode.csv`:
 
     ```bash
     # Bulk encode to QR

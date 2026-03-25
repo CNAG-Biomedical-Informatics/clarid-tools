@@ -8,6 +8,17 @@
 
 {% include-markdown "../README.md" start="<!--description-start-->" end="<!--description-end-->" %}
 
+## Before You Start
+
+Choose the command style that matches how you are using ClarID-Tools:
+
+- If you cloned this repository, run commands from the repository root with `bin/clarid-tools`.
+- If you installed ClarID-Tools system-wide or with CPAN, run `clarid-tools`.
+- You can omit `--codebook` unless you want to use a custom codebook. The packaged default codebook is used automatically.
+- The `qrcode` subcommand requires external tools:
+  - host install or git checkout: install `qrencode` and `zbarimg` (`zbar-tools`)
+  - Docker image: these tools are already included
+
 ## Start Here
 
 If you are new to ClarID-Tools, use this order:

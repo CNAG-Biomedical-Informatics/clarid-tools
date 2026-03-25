@@ -4,6 +4,15 @@
 
 ---
 
+## Before You Run Commands
+
+- In a repository checkout, run `bin/clarid-tools` from the repository root.
+- In an installed environment, run `clarid-tools`.
+- `--codebook` is optional unless you want to use a custom codebook.
+- `qrcode` requires external tools:
+  - host install or git checkout: install `qrencode` and `zbarimg` (`zbar-tools`)
+  - Docker image: already included
+
 ## Quick examples
 
 ```bash
@@ -114,6 +123,12 @@ clarid-tools [-h] [long options ...]
 - `--usage`, `-h`, `--help`, `--man`:  
   Show help messages or manual
 
+- `--version`:  
+  Show the installed ClarID-Tools version
+
+- `--log`, `--log=FILE`:  
+  Write a JSON log record for the invocation
+
 Example:
 
 ```bash
@@ -151,6 +166,8 @@ clarid-tools validate --codebook share/clarid-codebook.yaml
 ```bash
 clarid-tools qrcode [-h] [long options ...]
 ```
+
+This subcommand shells out to `qrencode` for encode mode and `zbarimg` for decode mode. On the host, install those tools before using `qrcode`. In the Docker image, they are already present.
 
 - `--action`: *String*  
   `encode | decode`

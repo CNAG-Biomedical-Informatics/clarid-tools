@@ -62,7 +62,7 @@ Run the pre-processing with:
     --entity subject \
     -i clinical.tsv.gz \
     -o clinical_in.csv.gz \
-    --mapping ../../i../utils/csv/gdc_subject_mapping.yaml
+    --mapping ../../../utils/csv/gdc_subject_mapping.yaml
 ```
 
 ---

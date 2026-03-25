@@ -66,6 +66,13 @@ We offer two modes of installation:
 2. [Containerized](docker/README.md)
 
 
+### ▶️ Running the CLI
+
+- If you cloned this repository, run commands from the repository root with `bin/clarid-tools`.
+- If you installed ClarID-Tools with CPAN or system-wide, run `clarid-tools`.
+- The packaged default codebook is used automatically, so `--codebook` is only needed when you want to use a custom codebook.
+- The `qrcode` subcommand requires `qrencode` and `zbarimg` on host installs. The Docker image already includes them.
+
 ### 📘 Example Usage
 
 1. [Quickstart](https://cnag-biomedical-informatics.github.io/clarid-tools/usage/quickstart/)

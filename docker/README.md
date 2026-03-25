@@ -1,6 +1,6 @@
 # Containerized Installation
 
-### Method 3: Installing from Docker Hub (fast)
+### Method 1: Installing from Docker Hub (fast)
 
 Pull the latest Docker image from [Docker Hub](https://hub.docker.com/r/manuelrueda/clarid-tools):
 
@@ -9,9 +9,9 @@ docker pull manuelrueda/clarid-tools:latest
 docker image tag manuelrueda/clarid-tools:latest cnag/clarid-tools:latest
 ```
 
-### Method 4: Installing from Dockerfile (slow)
+### Method 2: Building from the repository Dockerfile
 
-Download the `Dockerfile` from [GitHub](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/Dockerfile):
+Download the `Dockerfile` from [GitHub](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/docker/Dockerfile):
 
 ```bash
 wget https://raw.githubusercontent.com/CNAG-Biomedical-Informatics/clarid-tools/main/docker/Dockerfile
@@ -32,6 +32,8 @@ Then build the container:
   ```
 
 ## Running and Interacting with the Container
+
+The Docker image already includes the external QR dependencies used by `clarid-tools qrcode`, including `qrencode` and `zbarimg` (`zbar-tools`).
 
 To run the container:
 
