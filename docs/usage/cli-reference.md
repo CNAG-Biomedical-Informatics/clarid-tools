@@ -9,6 +9,7 @@
 - In a repository checkout, run `bin/clarid-tools` from the repository root.
 - In an installed environment, run `clarid-tools`.
 - `--codebook` is optional unless you want to use a custom codebook.
+- The stable paths `share/clarid-codebook.yaml` and `share/clarid-codebook-schema.json` point to the latest bundled ClarID release. Use `share/versions/<version>/...` to pin a specific release.
 - `qrcode` requires external tools:
   - host install or git checkout: install `qrencode` and `zbarimg` (`zbar-tools`)
   - Docker image: already included
@@ -48,7 +49,9 @@ clarid-tools [-h] [long options ...]
   ID to decode (use `--clar_id` or `--stub_id`)
 
 - `--codebook`: *String*  
-  Path to `codebook.yaml`
+  Path to `codebook.yaml`. You can use the stable bundled path
+  `share/clarid-codebook.yaml` or a version-pinned path such as
+  `share/versions/0.03/clarid-codebook.yaml`.
 
 - `--condition`: *String*  
   Condition key or ICD-10 code
@@ -143,13 +146,17 @@ clarid-tools validate [-h] [long options ...]
 ```
 
 - `--codebook`: *String*  
-  Path to your `codebook.yaml`
+  Path to your `codebook.yaml`. You can use the stable bundled path
+  `share/clarid-codebook.yaml` or a version-pinned path such as
+  `share/versions/0.03/clarid-codebook.yaml`.
 
 - `--debug`:  
   Self-validate the schema before use
 
 - `--schema`: *String*  
-  Path to JSON Schema file
+  Path to JSON Schema file. You can use the stable bundled path
+  `share/clarid-codebook-schema.json` or a version-pinned path such as
+  `share/versions/0.03/clarid-codebook-schema.json`.
 
 - `--usage`, `-h`, `--help`, `--man`:  
   Show help messages or manual

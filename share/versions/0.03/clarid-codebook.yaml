@@ -12,7 +12,9 @@
 #   - code      = Element 2 (binomial acronym)
 #   - tax_code  = Element 1 (taxonomic classification)
 #                 included here only as metadata, NOT used in current encode/decode routines
-#   - stub_code = 2-character Base-62 species index (unique identifier)
+#   - stub_code = Base-62 species index (unique identifier)
+#       The reference codebook uses width 2. Other widths are supported as long as
+#       all species stub_code values in a given codebook use the same length.
 #
 # Naming conventions:
 # - Vocabulary keys under "biosample" and "subject" use CamelCase
@@ -23,11 +25,11 @@
 # -----------------------------------------------------------------------------
 
 metadata:
-  version:       "0.02"                # official ClarID release
-  local_version: "CNAG-2025.09.05"     # internal/project revision (optional)
+  version:       "0.03"                # Publication release
+  local_version: "CNAG-2025.04.01"     # internal/project revision (optional)
   author:        "Manuel Rueda <manuel.rueda@cnag.eu>"
   center:        "CNAG"
-  date:          "2025-09-05"
+  date:          "2025-04-01"
   description:   "CNAG's ClarID codebook."
   repository:    "https://github.com/cnag-biomedical-informatics/clarid-tools"
 

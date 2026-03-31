@@ -5,6 +5,7 @@ Let's start encoding and decoding right away!
 - If you cloned this repository, run the examples from the repository root with `bin/clarid-tools`.
 - If you installed ClarID-Tools outside the repository, replace `bin/clarid-tools` with `clarid-tools`.
 - The examples below show `--codebook share/clarid-codebook.yaml` for clarity, but the packaged default codebook is used automatically unless you override it.
+- If you maintain project-specific variants of a codebook, keep the same ClarID `version` and use `local_version` to track your ad hoc revisions.
 - `condition` values must already be normalized to ICD-10 before encoding.
 - `qrcode` mode needs `qrencode` for QR generation and `zbarimg` for QR decoding when running on the host. The Docker image already includes both tools.
 

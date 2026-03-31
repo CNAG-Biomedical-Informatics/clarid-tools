@@ -18,18 +18,26 @@ Defines global codebook info:
 
 ```yaml
 metadata:
-  version: "0.02"         # 🏷️ version
-  local_version: "CNAG-2025.09.05"  #  🏷️  internal/project revision (optional)
+  version: "0.03"         # 🏷️ official ClarID specification version
+  local_version: "CNAG-GDC-v1"  # 🏷️ project-specific codebook revision (optional)
   author: "M. Rueda"      # 👤 author
   center: "CNAG"          # 🏢 institution
-  date: "2025-09-05"      # 📅 YYYY-MM-DD
+  date: "2026-04-01"      # 📅 YYYY-MM-DD
   description: "ClarID codebook"  # 📝 summary
   repository: "https://github.com/cnag-biomedical-informatics/clarid-tools"  # 🔗 repo URL
 ```
 
-??? Note "About Codebook Version"
-    The codebook, specification, and ClarID-Tools software are versioned in sync.
-    Each software release is expected to include the corresponding codebook version.
+??? Note "About `version`"
+    `version` identifies the official ClarID specification release targeted by the
+    codebook and schema, for example `0.03`. ClarID-Tools compatibility is defined
+    at this release level.
+
+??? Tip "About `local_version`"
+    `local_version` is optional and can be used for ad hoc or project-specific
+    codebook variants without changing the official ClarID specification version.
+    This is useful when different projects need their own controlled vocabularies,
+    aliases, or dictionary updates while still conforming to the same ClarID
+    release.
 
 ---
 
