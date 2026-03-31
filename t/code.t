@@ -576,4 +576,25 @@ unlink $logfile;
     );
 }
 
+# 30. Unsupported codebook version is rejected
+{
+    my $bad_cb = _temp_codebook(
+        sub {
+            my ($doc) = @_;
+            $doc->{metadata}{version} = '0.04';
+        }
+    );
+
+    my $cmd =
+      "$^X $inc $exe code --entity biosample --format human --action encode --codebook $bad_cb "
+      . "--project TCGA-AML --species Human --subject_id 1 --tissue Liver --sample_type Tumor "
+      . "--assay RNA_seq --condition I25.110 --timepoint Baseline --duration P0D --batch 1 --replicate 5 2>&1";
+    my $out = `$cmd`;
+    like(
+        $out,
+        qr/Unsupported codebook version '0\.04'.*supports: 0\.02, 0\.03/,
+        'unsupported codebook version is rejected in code mode'
+    );
+}
+
 done_testing();
