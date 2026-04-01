@@ -11,12 +11,9 @@
 
     Stub fields therefore represent the same metadata as the human-readable form, but they are not character-by-character abbreviations of it.
 
-
 ??? question "For `condition` do I need to encode to ICD-10 before ClarID-Tools?"
 
     Yes, ClarID-Tools reads ICD-10 diagnosis codes. Take a look at the [pre-processing documentation](../technical-details/pre-processing-script.md).
-
-    ##### last change 2025-07-21 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
 
 ??? question "Can I include multiple ICD-10 diagnosis codes?"
 
@@ -26,8 +23,6 @@
     * Bulk (CSV): Separate them by `;` (semicolon) 
 
     The maximum is set with the parameter `--max_conditions`, which defaults to **10**. We reserve 2 chars for that field, so the limit is 99 conditions.
-
-    ##### last change 2025-08-10 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
 
 ??? question "Does the stub `condition` encoding depend on the YAML order?"
 
@@ -52,8 +47,6 @@
     Since we rely on ICD-10 coding, we have selected code Z00.00 ("Encounter for general adult medical examination without abnormal findings").
 
     If you believe there is a more appropriate code for this context, please feel free to suggest it.
-
-    ##### last change 2025-08-10 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)
 
 ## Usage and Troubleshooting
 
@@ -93,5 +86,3 @@
 
     !!! Note "Citation"
         Manuel Rueda and Ivo G. Gut (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Submitted_.
-
-    ##### last change 2025-08-10 by Manuel Rueda [:fontawesome-brands-github:](https://github.com/mrueda)

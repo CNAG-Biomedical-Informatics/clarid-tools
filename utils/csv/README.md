@@ -6,6 +6,8 @@
 
 🧬 *Included in the containerized version of ClarID-Tools — no installation needed if using the Docker image.*
 
+__Note:__ These helper scripts are intended to work with the ClarID-Tools release they are shipped with.
+
 ---
 
 ## 🚀 Usage
@@ -190,4 +192,4 @@ fields:
 ## 📜 License
 
 Artistic License 2.0  
-(C) 2025 Manuel Rueda - CNAG
+(C) 2025-2026 Manuel Rueda - CNAG

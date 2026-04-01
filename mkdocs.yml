@@ -1,7 +1,7 @@
 site_name: 'ClarID-Tools Documentation'
 site_description: 'ClarID-Tools: ID Management for Biospecimens and Subjects'
 site_author: 'Manuel Rueda, PhD'
-copyright: '&copy; Copyright 2025, Manuel Rueda, CNAG'
+copyright: '&copy; Copyright 2025-2026, Manuel Rueda, CNAG'
 repo_name: 'ClarID-Tools'
 repo_url: https://github.com/CNAG-Biomedical-Informatics/clarid-tools
 edit_uri: edit/main/docs/
