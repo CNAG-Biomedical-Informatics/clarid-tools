@@ -10,7 +10,7 @@ ENV PATH="/usr/local/sbin:/usr/sbin:/sbin:${PATH}"
 
 # Install Linux tools
 RUN apt-get update && \
-    apt-get -y install gcc make git cpanminus perl-doc vim sudo libperl-dev qrencode zbar-tools python3
+    apt-get -y install gcc make git cpanminus perl-doc vim sudo libperl-dev qrencode zbar-tools python3 python3-pip
 
 # Download Convert-Pheno
 WORKDIR /usr/share/
@@ -25,6 +25,9 @@ RUN rm -rf clarid-tools/docs/ clarid-tools/mkdocs.yml
 # Install Perl modules
 WORKDIR /usr/share/clarid-tools
 RUN cpanm --notest --installdeps .
+
+# Install Python modules (utils)
+RUN pip3 install --no-cache-dir -r utils/csv/requirements.txt
 
 # Add user "dockeruser"
 ARG UID=1000
