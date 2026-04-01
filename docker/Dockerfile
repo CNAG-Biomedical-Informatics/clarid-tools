@@ -10,7 +10,7 @@ ENV PATH="/usr/local/sbin:/usr/sbin:/sbin:${PATH}"
 
 # Install Linux tools
 RUN apt-get update && \
-    apt-get -y install gcc make git cpanminus perl-doc vim sudo libperl-dev qrencode zbar-tools
+    apt-get -y install gcc make git cpanminus perl-doc vim sudo libperl-dev qrencode zbar-tools python3
 
 # Download Convert-Pheno
 WORKDIR /usr/share/
