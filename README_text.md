@@ -51,11 +51,25 @@ We offer two modes of installation:
 
 ---
 
+## 📚 Documentation Development
+
+The documentation site is built with Docusaurus under `docs-site/`.
+
+```bash
+cd docs-site
+npm install
+npm run build
+```
+
+Some Docusaurus pages are generated from repository README files; see `docs-site/README.md` before editing copied installation or preprocessing pages.
+
+---
+
 ## 🧠 Citation
 
 If you use **ClarID-Tools** in your work, please cite:
 
-Manuel Rueda and Ivo G. Gut (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Journal of Biomedical Semantics_. Accepted.
+Rueda, M. and Gut, I.G. (2026). ClarID: a human-readable and compact identifier specification for biomedical metadata integration. _Journal of Biomedical Semantics_ 17, 9. https://doi.org/10.1186/s13326-026-00349-6
 
 ---
 

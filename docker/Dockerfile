@@ -19,8 +19,8 @@ RUN git clone https://github.com/CNAG-Biomedical-Informatics/clarid-tools.git
 # Remove Git metadata and CI configs to shrink image and avoid shipping them
 RUN rm -rf clarid-tools/.git clarid-tools/.github clarid-tools/.gitattributes clarid-tools/.gitignore
 
-# Remove docs
-RUN rm -rf clarid-tools/docs/ clarid-tools/mkdocs.yml
+# Remove documentation sources from the runtime image
+RUN rm -rf clarid-tools/docs/ clarid-tools/docs-site/ clarid-tools/mkdocs.yml
 
 # Install Perl modules
 WORKDIR /usr/share/clarid-tools

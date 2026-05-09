@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/cnag-biomedical-informatics/clarid-tools"><img src="docs/img/clarid-logo.png" width="300" alt="ClarID-Tools"></a>
+  <a href="https://github.com/cnag-biomedical-informatics/clarid-tools"><img src="docs-site/static/img/clarid-logo.png" width="300" alt="ClarID-Tools"></a>
 </p>
 <p align="center">
     <em>ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration</em>
