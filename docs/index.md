@@ -26,7 +26,7 @@ If you are new to ClarID-Tools, use this order:
 1. Read the [Quickstart](usage/quickstart.md) for copy-paste examples.
 2. Check the [CLI Reference](usage/cli-reference.md) for all command options.
 3. Review the [Specification](technical-details/specification.md) if you need the exact identifier structure.
-4. See the [Use Cases](use-cases/subject.md) and [Use Cases](use-cases/biosample.md) for real GDC-derived examples.
+4. See the [Subject Use Case](use-cases/subject.md) and [Biosample Use Case](use-cases/biosample.md) for real GDC-derived examples.
 
 ## Choosing an ID Format
 

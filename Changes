@@ -1,5 +1,9 @@
 Revision history for ClarID-Tools
 
+0.04 2025-XX-XXT00:00:00Z (Manuel Rueda <mrueda@cpan.org>)
+
+ - Migrated project documentation from MkDocs to Docusaurus
+
 0.03 2025-04-01T00:00:00Z (Manuel Rueda <mrueda@cpan.org>)
 
  - Moved csv pre-processing scripts from nb/data/scripts to utils/csv. Updated nb/*py accordingly

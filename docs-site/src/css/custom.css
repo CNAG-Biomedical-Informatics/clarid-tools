@@ -1,0 +1,498 @@
+:root {
+  --ifm-color-primary: #315f72;
+  --ifm-color-primary-dark: #2c5667;
+  --ifm-color-primary-darker: #294f60;
+  --ifm-color-primary-darkest: #22424f;
+  --ifm-color-primary-light: #396d83;
+  --ifm-color-primary-lighter: #3e758c;
+  --ifm-color-primary-lightest: #4b879f;
+  --ifm-code-font-size: 95%;
+  --clarid-ink: #16323d;
+  --clarid-muted: #59717a;
+  --clarid-wash: #eef6f4;
+  --clarid-line: rgba(49, 95, 114, 0.18);
+  --clarid-accent: #b86b33;
+}
+
+.markdown figure {
+  text-align: center;
+}
+
+.markdown figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+.markdown figcaption {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.markdown table {
+  display: table;
+  width: 100%;
+}
+
+.tablePreview {
+  max-height: 520px;
+  overflow: auto;
+  border: 1px solid var(--ifm-table-border-color);
+  border-radius: 6px;
+}
+
+.tablePreview table {
+  margin-bottom: 0;
+}
+
+.claridDocHero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--clarid-line);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(184, 107, 51, 0.18), transparent 30%),
+    linear-gradient(135deg, #f7fbfa 0%, #e8f3f1 54%, #f7efe8 100%);
+  box-shadow: 0 20px 50px rgba(22, 50, 61, 0.08);
+}
+
+.claridQuickHero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 1.25rem;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border: 1px solid var(--clarid-line);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(184, 107, 51, 0.18), transparent 28%),
+    linear-gradient(135deg, #f9fbfb 0%, #eaf4f1 55%, #fff7ef 100%);
+  box-shadow: 0 18px 42px rgba(22, 50, 61, 0.075);
+}
+
+.claridQuickHero::after {
+  position: absolute;
+  right: -3rem;
+  bottom: -5rem;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(49, 95, 114, 0.13) 48%, rgba(49, 95, 114, 0.13) 52%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(49, 95, 114, 0.13) 48%, rgba(49, 95, 114, 0.13) 52%, transparent 52%);
+  content: "";
+}
+
+.claridQuickHero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.claridQuickHero h2 {
+  max-width: 760px;
+  margin: 0;
+  color: var(--clarid-ink);
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.claridQuickHero p:not(.claridEyebrow) {
+  max-width: 740px;
+  margin: 1rem 0 0;
+  color: var(--clarid-muted);
+  font-size: 1.06rem;
+  line-height: 1.62;
+}
+
+.claridCliHero {
+  background:
+    radial-gradient(circle at 82% 12%, rgba(49, 95, 114, 0.2), transparent 28%),
+    linear-gradient(135deg, #f9fbfb 0%, #eef6f4 58%, #eef3f8 100%);
+}
+
+.claridCommandMap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1rem 0 2rem;
+}
+
+.claridCommandMap a {
+  display: grid;
+  gap: 0.45rem;
+  min-height: 148px;
+  padding: 1rem;
+  border: 1px solid var(--clarid-line);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, #ffffff, rgba(238, 246, 244, 0.66));
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(22, 50, 61, 0.05);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.claridCommandMap a:hover {
+  border-color: rgba(184, 107, 51, 0.45);
+  box-shadow: 0 16px 32px rgba(22, 50, 61, 0.08);
+  transform: translateY(-1px);
+}
+
+.claridCommandMap span {
+  width: fit-content;
+  padding: 0.26rem 0.58rem;
+  border-radius: 999px;
+  background: var(--clarid-ink);
+  color: #fff;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.claridCommandMap strong {
+  color: var(--clarid-ink);
+  font-size: 1.08rem;
+}
+
+.claridCommandMap small {
+  color: var(--clarid-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.claridDocHero::after {
+  position: absolute;
+  right: -5rem;
+  bottom: -7rem;
+  width: 18rem;
+  height: 18rem;
+  border: 1px solid rgba(49, 95, 114, 0.2);
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(49, 95, 114, 0.08),
+    rgba(49, 95, 114, 0.08) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  content: "";
+}
+
+.claridDocHero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.claridDocHero h2 {
+  max-width: 780px;
+  margin: 0;
+  color: var(--clarid-ink);
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.claridDocHero p:not(.claridEyebrow) {
+  max-width: 720px;
+  margin: 1.1rem 0 0;
+  color: var(--clarid-muted);
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.claridEyebrow,
+.claridCardLabel {
+  color: var(--clarid-accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.claridHeroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.6rem;
+}
+
+.claridCardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.claridCard,
+.claridNotePanel,
+.claridSplit > div {
+  border: 1px solid var(--clarid-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(22, 50, 61, 0.055);
+}
+
+.claridCard {
+  padding: 1.2rem;
+}
+
+.claridCard h3 {
+  margin: 0.45rem 0 0.5rem;
+  color: var(--clarid-ink);
+}
+
+.claridCard p,
+.claridSplit p {
+  margin-bottom: 0;
+  color: var(--clarid-muted);
+}
+
+.claridNotePanel {
+  margin: 1rem 0 2rem;
+  padding: 1.1rem 1.25rem;
+  background:
+    linear-gradient(90deg, rgba(49, 95, 114, 0.08), transparent 60%),
+    #fff;
+}
+
+.claridNotePanel p {
+  margin-top: 0;
+}
+
+.claridNotePanel ul {
+  margin-bottom: 0;
+}
+
+.claridSetupDetails {
+  margin: 1rem 0 1.6rem;
+  border: 1px solid var(--clarid-line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(22, 50, 61, 0.045);
+}
+
+.claridSetupDetails > summary {
+  cursor: pointer;
+  padding: 0.9rem 1rem;
+  color: var(--clarid-ink);
+  font-weight: 800;
+}
+
+.claridSetupDetails .claridNotePanel {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--clarid-line);
+  border-radius: 0 0 16px 16px;
+  box-shadow: none;
+}
+
+.claridAboutGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.7rem;
+}
+
+.claridAboutGrid article,
+.claridPeopleGrid article,
+.claridAboutCallout {
+  border: 1px solid var(--clarid-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(22, 50, 61, 0.05);
+}
+
+.claridAboutGrid article {
+  padding: 1.15rem;
+}
+
+.claridAboutGrid span,
+.claridPeopleGrid span {
+  color: var(--clarid-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.claridAboutGrid h3 {
+  margin: 0.4rem 0 0.55rem;
+  color: var(--clarid-ink);
+}
+
+.claridAboutGrid p {
+  margin: 0;
+  color: var(--clarid-muted);
+}
+
+.claridAboutCallout {
+  margin: 1rem 0 1.4rem;
+  padding: 1.1rem 1.2rem;
+  background:
+    linear-gradient(90deg, rgba(184, 107, 51, 0.1), transparent 52%),
+    #fff;
+}
+
+.claridAboutCallout p {
+  margin: 0;
+  color: var(--clarid-ink);
+  font-size: 1.03rem;
+  line-height: 1.6;
+}
+
+.claridPeopleGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.6rem;
+}
+
+.claridPeopleGrid article {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1rem 1.1rem;
+}
+
+.claridPeopleGrid strong {
+  color: var(--clarid-ink);
+  font-size: 1.05rem;
+}
+
+.claridCitationCard,
+.claridFundingPanel {
+  border: 1px solid var(--clarid-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(22, 50, 61, 0.05);
+}
+
+.claridCitationCard {
+  margin: 1rem 0 1.8rem;
+  padding: 1.2rem;
+  background:
+    linear-gradient(90deg, rgba(49, 95, 114, 0.08), transparent 56%),
+    #fff;
+}
+
+.claridCitationCard span {
+  color: var(--clarid-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.claridCitationCard p {
+  margin: 0.45rem 0 0;
+  color: var(--clarid-ink);
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.claridFundingPanel {
+  margin: 1rem 0 1.8rem;
+  padding: 1.2rem;
+}
+
+.claridFundingPanel p {
+  color: var(--clarid-muted);
+}
+
+.claridFundingPanel p:last-child {
+  margin-bottom: 0;
+}
+
+.claridFundingPanel img {
+  display: block;
+  max-width: min(520px, 100%);
+  margin: 1.2rem auto;
+}
+
+.claridPath {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0 2rem;
+}
+
+.claridPath a {
+  display: grid;
+  grid-template-columns: auto 170px 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--clarid-line);
+  border-radius: 16px;
+  background: linear-gradient(90deg, #ffffff, var(--clarid-wash));
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.claridPath a:hover {
+  border-color: rgba(184, 107, 51, 0.48);
+  box-shadow: 0 12px 26px rgba(22, 50, 61, 0.08);
+  transform: translateY(-1px);
+}
+
+.claridPath span {
+  display: inline-grid;
+  width: 2.3rem;
+  height: 2.3rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--clarid-ink);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.claridPath strong {
+  color: var(--clarid-ink);
+}
+
+.claridPath small {
+  color: var(--clarid-muted);
+  font-size: 0.92rem;
+}
+
+.claridSplit {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.claridSplit > div {
+  padding: 1.2rem;
+}
+
+.claridSplit h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .claridCardGrid,
+  .claridSplit,
+  .claridCommandMap,
+  .claridAboutGrid,
+  .claridPeopleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .claridPath a {
+    grid-template-columns: auto 1fr;
+  }
+
+  .claridPath small {
+    grid-column: 2;
+  }
+}

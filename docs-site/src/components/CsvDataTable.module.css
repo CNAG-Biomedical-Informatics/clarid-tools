@@ -1,0 +1,85 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.search {
+  min-width: min(100%, 24rem);
+  flex: 1;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.pageSize {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.summary {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+}
+
+.tableWrap {
+  max-height: 620px;
+  overflow: auto;
+  border: 1px solid var(--ifm-table-border-color);
+  border-radius: 6px;
+}
+
+.table {
+  width: 100%;
+  margin: 0;
+  min-width: 980px;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--ifm-background-surface-color);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.table td {
+  white-space: nowrap;
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.button {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.error {
+  color: var(--ifm-color-danger-dark);
+}

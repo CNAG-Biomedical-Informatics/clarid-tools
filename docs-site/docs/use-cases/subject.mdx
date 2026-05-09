@@ -1,0 +1,144 @@
+import CsvDataTable from '@site/src/components/CsvDataTable';
+
+# Use Case I: Subject-Level Encoding of GDC Case Data
+
+## Data Download
+
+On June 1, 2025, we downloaded clinical metadata from the [Genomic Data Commons (GDC)](https://gdc.cancer.gov/) portal as part of the archive:
+
+```
+clinical.cohort.2025-06-02.tar.gz
+```
+
+All files were extracted to the `nb/data/subject` directory:
+
+```bash
+cd nb/data/subject
+tar -xvf clinical.cohort.2025-06-02.tar.gz
+```
+
+The archive included the following four TSV files:
+
+- `clinical.tsv`
+- `family_history.tsv`
+- `follow_up.tsv`
+- `pathology_detail.tsv`
+
+We focused our analysis on `clinical.tsv`, which contains:
+
+- **210 columns**
+- **113,760 rows**
+- Data from **86 studies**, including **33 from TCGA**
+
+Note that multiple cases can share the same UUID.
+
+We will keep the files compressed to minimize space:
+
+```bash
+gzip *.tsv
+```
+
+---
+
+## Data Pre-processing
+
+We pre-processed the data using the script `../../../utils/csv/csv2_clarid_in.py`, along with a column mapping file:
+
+<details>
+<summary>View Mapping File</summary>
+
+See
+[`utils/csv/gdc_subject_mapping.yaml`](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/utils/csv/gdc_subject_mapping.yaml).
+
+</details>
+Run the pre-processing with:
+
+<details>
+<summary>TSV UUID order</summary>
+
+
+The script assumes that your data is sorted by UUID (cases.case_id) in this case.  If not, you need to sort it manually using a command like
+ ```bash
+ sort -t$'\t' -k1,1 raw.tsv > raw.sorted.tsv
+ ```
+
+
+</details>
+```bash
+../../../utils/csv/csv2_clarid_in.py \
+    --entity subject \
+    -i clinical.tsv.gz \
+    -o clinical_in.csv.gz \
+    --mapping ../../../utils/csv/gdc_subject_mapping.yaml
+```
+
+---
+
+## ClarID encoding
+
+### Human-Readable Format
+
+```bash
+../../../bin/clarid-tools code \
+    --entity subject \
+    --format human \
+    --action encode \
+    --infile clinical_in.csv.gz \
+    --sep "," \
+    --outfile clarid_human.csv.gz
+```
+
+### Stub Format
+
+```bash
+../../../bin/clarid-tools code \
+    --entity subject \
+    --format stub \
+    --action encode \
+    --infile clinical_in.csv.gz \
+    --sep "," \
+    --outfile clarid_stub.csv.gz
+```
+
+## ClarID decoding
+
+### Human-Readable Format
+
+```bash
+../../../bin/clarid-tools code \
+    --entity subject \
+    --format human \
+    --action decode \
+    --infile clarid_human.csv.gz \
+    --sep "," \
+    --outfile clarid_decoded_human.csv.gz
+```
+
+:::tip[Duplicated columns?]
+Note: The resulting columns will be appended to the right of the existing ones, which may result in some columns appearing duplicated.
+
+:::
+### Stub Format
+
+```bash
+../../../bin/clarid-tools code \
+    --entity subject \
+    --format stub \
+    --action decode \
+    --infile clarid_stub.csv.gz \
+    --sep "," \
+    --outfile clarid_decoded_stub.csv.gz
+```
+
+
+## Results Table
+
+Below is a browsable table of the first 10,000 `human` format encodings. The full file is available at
+[`nb/data/subject/clarid_human.csv.gz`](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/tree/main/nb/data/subject/clarid_human.csv.gz).
+
+<CsvDataTable
+  src="/data/subject/clarid_human.csv.gz"
+  label="subject encodings"
+  initialPageSize={10}
+  maxRows={10000}
+/>

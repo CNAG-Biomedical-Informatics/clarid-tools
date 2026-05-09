@@ -215,9 +215,9 @@ Let's start encoding and decoding right away!
 
         ```bash
         unique_id,study,subject_id,type,condition,sex,age_group,clar_id
-        patient_001,COPDStudy,1001,Case,J98.51,Male,Age40to49,COPDStudy-01001-Case-J98.51-Male-A40_49
+        patient_001,COPDStudy,1001,Case,J44.9,Male,Age40to49,COPDStudy-01001-Case-J44.9-Male-A40_49
         patient_002,AsthmaCohort,1002,Control,J98.51,Female,Age50to59,AsthmaCohort-01002-Control-J98.51-Female-A50_59
-        patient_003,COPDStudy,1003,Control,J98.51,Female,Age50to59,COPDStudy-01003-Control-J98.51-Female-A50_59
+        patient_003,COPDStudy,1003,Control,J44.9,Female,Age50to59,COPDStudy-01003-Control-J44.9-Female-A50_59
         patient_004,AsthmaCohort,1004,Case,J98.51,Male,Age40to49,AsthmaCohort-01004-Case-J98.51-Male-A40_49
         ```
 
@@ -234,10 +234,11 @@ Let's start encoding and decoding right away!
 
     ??? Example "Expected output:"
         ```bash
-        patient_001,COPDStudy-01001-Case-J98.51-Male-A40_49,COPDStudy0G9C2d1MA4,COPDStudy,1001,Case,J98.51,Male,Age40to49
-        patient_002,AsthmaCohort-01002-Control-J98.51-Female-A50_59,AsthmaCohort0GAN2d1FA5,AsthmaCohort,1002,Control,J98.51,Female,Age50to59
-        patient_003,COPDStudy-01003-Control-J98.51-Female-A50_59,COPDStudy0GBN2d1FA5,COPDStudy,1003,Control,J98.51,Female,Age50to59
-        patient_004,AsthmaCohort-01004-Case-J98.51-Male-A40_49,AsthmaCohort0GCC2d1MA4,AsthmaCohort,1004,Case,J98.51,Male,Age40to49
+        unique_id,clar_id,study,subject_id,type,condition,sex,age_group
+        patient_001,COPDStudy-01001-Case-J44.9-Male-A40_49,COPDStudy,1001,Case,J44.9,Male,Age40to49
+        patient_002,AsthmaCohort-01002-Control-J98.51-Female-A50_59,AsthmaCohort,1002,Control,J98.51,Female,Age50to59
+        patient_003,COPDStudy-01003-Control-J44.9-Female-A50_59,COPDStudy,1003,Control,J44.9,Female,Age50to59
+        patient_004,AsthmaCohort-01004-Case-J98.51-Male-A40_49,AsthmaCohort,1004,Case,J98.51,Male,Age40to49
         ```
 
     ### Stub Format

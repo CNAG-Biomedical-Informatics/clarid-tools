@@ -31,8 +31,6 @@ If wording in the paper and implementation documentation ever diverge, the paper
 === "Documentation"
 
     * [Manuel Rueda](https://github.com/mrueda). 
-      
-    Project documentation was created using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material).
 
 ## Acknowledgments
 

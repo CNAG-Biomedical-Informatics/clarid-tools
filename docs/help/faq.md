@@ -85,4 +85,4 @@
     You can cite the **ClarID-Tools** paper.
 
     !!! Note "Citation"
-        Manuel Rueda and Ivo G. Gut (2025). ClarID: A Human-Readable and Compact Identifier Specification for Biomedical Metadata Integration. _Submitted_.
+        Rueda, M. and Gut, I.G. (2026). ClarID: a human-readable and compact identifier specification for biomedical metadata integration. _Journal of Biomedical Semantics_ 17, 9. https://doi.org/10.1186/s13326-026-00349-6
