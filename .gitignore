@@ -3,6 +3,7 @@
 *.swp
 *.pyc
 bck/
+**/bck/
 old/
 __pycache__/
 /do_readme.sh
