@@ -39,6 +39,7 @@ const sidebars: SidebarsConfig = {
         {type: 'doc', id: 'technical-details/specification', label: 'Specification'},
         {type: 'doc', id: 'technical-details/codebook-and-schema', label: 'Codebook & Schema'},
         {type: 'doc', id: 'technical-details/pre-processing-script', label: 'Pre-processing Script'},
+        {type: 'doc', id: 'technical-details/use-from-r', label: 'Use from R'},
       ],
     },
     {

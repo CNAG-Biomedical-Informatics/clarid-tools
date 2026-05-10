@@ -10,6 +10,54 @@ __Note:__ These helper scripts are intended to work with the ClarID-Tools releas
 
 ---
 
+## From raw table to ClarID input
+
+`csv2_clarid_in.py` is a preparation step. It does **not** create ClarID identifiers by itself; it converts a local tabular file into the CSV shape expected by `clarid-tools code --infile`.
+
+The workflow has four steps:
+
+1. Start with a raw TSV or CSV file from a local source.
+2. Describe how source columns map to ClarID fields in a YAML file.
+3. Run `csv2_clarid_in.py` to create a ClarID-ready CSV.
+4. Pass that CSV to `clarid-tools code --infile` to generate identifiers.
+
+For example, a project may start with a table whose column names and values come from a local LIMS, spreadsheet, or public repository:
+
+| sample_barcode | patient | organism | tissue_site | diagnosis | days_from_baseline |
+| --- | --- | --- | --- | --- | --- |
+| S-001 | P001 | Homo sapiens | liver | Liver cancer | 0 |
+| S-002 | P002 | Mus musculus | brain | Brain cancer | 49 |
+
+The mapping YAML tells the script which source columns to read, how to normalize values, and which ClarID fields to emit. The output should contain the fields needed by the selected ClarID entity.
+
+Typical `biosample` output columns are:
+
+```text
+unique_id,subject_id,project,species,tissue,sample_type,assay,condition,timepoint,duration,batch,replicate
+```
+
+Typical `subject` output columns are:
+
+```text
+unique_id,study,subject_id,type,condition,sex,age_group
+```
+
+Once the CSV is prepared, pass it to ClarID-Tools:
+
+```bash
+clarid-tools code \
+  --entity biosample \
+  --format human \
+  --action encode \
+  --infile clarid_ready_biosample.csv \
+  --sep "," \
+  --outfile clarid_encoded_biosample.csv
+```
+
+The final output from `clarid-tools code` will contain the generated `clar_id` or `stub_id` column.
+
+---
+
 ## 🚀 Usage
 
 ```bash
