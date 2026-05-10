@@ -49,9 +49,9 @@
 .copy h1 {
   max-width: 880px;
   margin: 0;
-  font-size: clamp(2.25rem, 4.8vw, 4.4rem);
-  line-height: 1.04;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.05rem, 4.1vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
 
 .kicker,
@@ -69,7 +69,7 @@
   max-width: 720px;
   margin: 1.5rem 0 2rem;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 1.25rem;
+  font-size: 1.12rem;
   line-height: 1.62;
 }
 
@@ -77,6 +77,52 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  align-items: center;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 2.85rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.78rem 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.primaryAction {
+  border: 1px solid #ffc489;
+  background: #ffc489;
+  color: #16323d;
+  box-shadow: 0 14px 32px rgba(4, 24, 32, 0.24);
+}
+
+.primaryAction:hover {
+  background: #ffd4a3;
+  border-color: #ffd4a3;
+  color: #16323d;
+  transform: translateY(-1px);
+}
+
+.secondaryAction {
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.secondaryAction:hover {
+  border-color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  transform: translateY(-1px);
 }
 
 .identityCard {

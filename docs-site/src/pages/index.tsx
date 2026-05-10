@@ -15,21 +15,21 @@ export default function Home(): React.ReactElement {
         <section className={styles.hero}>
           <div className={styles.heroGrid}>
             <div className={styles.copy}>
-            <p className={styles.kicker}>ClarID-Tools</p>
-            <h1>Human-readable and compact identifiers for biomedical metadata</h1>
-            <p className={styles.lede}>
-              Encode and decode subject and biosample identifiers with a versioned
-              codebook, schema validation, and reproducible command-line workflows.
-            </p>
-            <div className={styles.actions}>
-              <Link className="button button--primary button--lg" to="/usage/quickstart">
-                Quickstart
-              </Link>
-              <Link className="button button--secondary button--lg" to="/technical-details/specification">
-                Specification
-              </Link>
+              <p className={styles.kicker}>ClarID-Tools</p>
+              <h1>Human-readable and compact identifiers for biomedical metadata</h1>
+              <p className={styles.lede}>
+                Encode and decode subject and biosample identifiers with a versioned
+                codebook, schema validation, and reproducible command-line workflows.
+              </p>
+              <div className={styles.actions}>
+                <Link className={styles.primaryAction} to="/usage/quickstart">
+                  Quickstart
+                </Link>
+                <Link className={styles.secondaryAction} to="/technical-details/specification">
+                  Read the specification
+                </Link>
+              </div>
             </div>
-          </div>
             <div className={styles.identityCard} aria-label="ClarID identifier example">
               <img className={styles.logo} src={logo} alt="ClarID-Tools" />
               <div className={styles.identifier}>
@@ -40,7 +40,11 @@ export default function Home(): React.ReactElement {
                 <span>species</span>
                 <span>subject</span>
                 <span>tissue</span>
+                <span>sample type</span>
+                <span>assay</span>
                 <span>condition</span>
+                <span>timepoint</span>
+                <span>duration</span>
               </div>
             </div>
           </div>
