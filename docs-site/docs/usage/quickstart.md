@@ -371,7 +371,7 @@ When encoding values into QR code PNGs, the script sanitizes each value to creat
 <details>
 <summary>See QR-codes</summary>
 
-![QR](../img/biosample-qrcode.png)
+![QR](/img/biosample-qrcode.png)
 
 </details>
  Convert back to ClarID:
@@ -399,6 +399,6 @@ bin/clarid-tools qrcode \
 <details>
 <summary>See QR-codes</summary>
 
-![QR](../img/subject-qrcode.png)
+![QR](/img/subject-qrcode.png)
 
 </details>

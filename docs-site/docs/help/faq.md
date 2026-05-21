@@ -18,7 +18,7 @@ Stub fields therefore represent the same metadata as the human-readable form, bu
 <summary>For `condition` do I need to encode to ICD-10 before ClarID-Tools?</summary>
 
 
-Yes, ClarID-Tools reads ICD-10 diagnosis codes. Take a look at the [pre-processing documentation](../technical-details/pre-processing-script.md).
+Yes, ClarID-Tools reads ICD-10 diagnosis codes. Take a look at the [pre-processing documentation](/technical-details/pre-processing-script).
 
 </details>
 <details>

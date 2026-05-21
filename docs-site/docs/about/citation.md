@@ -20,7 +20,7 @@
     innovation programme and EFPIA.
   </p>
 
-![Funding agencies](../img/3tr-funding.png)
+![Funding agencies](/img/3tr-funding.png)
 
   <p>
     Institutional support was from the Spanish Instituto de Salud Carlos III,

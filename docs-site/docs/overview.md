@@ -23,22 +23,22 @@ metadata.
 ## Start Here
 
 <div class="claridPath">
-  <a href="../usage/quickstart">
+  <a href="/clarid-tools/usage/quickstart">
     <span>01</span>
     <strong>Quickstart</strong>
     <small>Copy-paste examples for encoding and decoding.</small>
   </a>
-  <a href="../usage/cli-reference">
+  <a href="/clarid-tools/usage/cli-reference">
     <span>02</span>
     <strong>CLI Reference</strong>
     <small>All commands, options, and output modes.</small>
   </a>
-  <a href="../technical-details/specification">
+  <a href="/clarid-tools/technical-details/specification">
     <span>03</span>
     <strong>Specification</strong>
     <small>The exact identifier structure and supported fields.</small>
   </a>
-  <a href="../use-cases/subject">
+  <a href="/clarid-tools/use-cases/subject">
     <span>04</span>
     <strong>Use Cases</strong>
     <small>Browsable GDC-derived subject and biosample examples.</small>

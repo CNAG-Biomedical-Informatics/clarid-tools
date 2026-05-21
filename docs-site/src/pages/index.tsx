@@ -10,13 +10,13 @@ export default function Home(): React.ReactElement {
   return (
     <Layout
       title="ClarID-Tools"
-      description="Human-readable and compact identifiers for biomedical metadata">
+      description="Human-readable identifiers for biomedical metadata">
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroGrid}>
             <div className={styles.copy}>
               <p className={styles.kicker}>ClarID-Tools</p>
-              <h1>Human-readable and compact identifiers for biomedical metadata</h1>
+              <h1>Human-readable identifiers for biomedical metadata</h1>
               <p className={styles.lede}>
                 Encode and decode subject and biosample identifiers with a versioned
                 codebook, schema validation, and reproducible command-line workflows.
