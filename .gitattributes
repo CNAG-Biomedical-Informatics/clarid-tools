@@ -2,4 +2,4 @@
 *.pm linguist-language=Perl
 *.t linguist-language=Perl
 nb/** linguist-vendored
-~                          
+docs-site/** linguist-vendored
