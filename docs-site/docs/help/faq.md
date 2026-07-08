@@ -111,6 +111,15 @@ The most common causes are:
 ## General
 
 <details>
+<summary>What does ClarID mean?</summary>
+
+
+ClarID is named to evoke the idea of a **clear ID**: an identifier whose structure makes selected metadata easier to interpret.
+
+The name also reflects the Catalan word *clar*, meaning "clear". In the biomedical context, **ClarID** can also be read as **CL**inical **A**nd **R**esearch **ID**, pointing to its intended use across clinical and research metadata workflows.
+
+</details>
+<details>
 <summary>How do I cite `clarid-tools`?</summary>
 
 
