@@ -77,7 +77,7 @@ clarid-tools [-h] [long options ...]
 - `--codebook`: *String*  
   Path to `codebook.yaml`. You can use the stable bundled path
   `share/clarid-codebook.yaml` or a version-pinned path such as
-  `share/versions/0.03/clarid-codebook.yaml`.
+  `share/versions/0.04/clarid-codebook.yaml`.
 
 - `--condition`: *String*  
   Condition key or ICD-10 code
@@ -174,7 +174,7 @@ clarid-tools validate [-h] [long options ...]
 - `--codebook`: *String*  
   Path to your `codebook.yaml`. You can use the stable bundled path
   `share/clarid-codebook.yaml` or a version-pinned path such as
-  `share/versions/0.03/clarid-codebook.yaml`.
+  `share/versions/0.04/clarid-codebook.yaml`.
 
 - `--debug`:  
   Self-validate the schema before use
@@ -182,7 +182,7 @@ clarid-tools validate [-h] [long options ...]
 - `--schema`: *String*  
   Path to JSON Schema file. You can use the stable bundled path
   `share/clarid-codebook-schema.json` or a version-pinned path such as
-  `share/versions/0.03/clarid-codebook-schema.json`.
+  `share/versions/0.04/clarid-codebook-schema.json`.
 
 - `--usage`, `-h`, `--help`, `--man`:  
   Show help messages or manual

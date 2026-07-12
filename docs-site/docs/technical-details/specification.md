@@ -19,7 +19,7 @@
 | 10 | Batch (opt) | `batch`                     | integer→str  | `B%02d` (e.g. `B01`)                                        | `batch_pattern`                            |
 | 11 | Replicate (opt) | `replicate`             | integer→str  | `R%02d` (e.g. `R05`)                                        | `replicate_pattern`                        |
 
-> Note (`duration`): The 3-character limit (PnU) is intentional, designed to keep timepoint duration compact and consistent, rather than attempting to represent every possible duration in full detail; see [duration binning](./pre-processing-script.md#duration-binning-days-to-iso8601-pnu).
+> Note (`duration`): The 3-character limit (`PnU`) is intentional, designed to keep duration compact and consistent rather than represent every possible duration in full detail; see [duration binning](./pre-processing-script.md#duration-binning-days-to-iso8601-pnu). This constraint may evolve with community feedback.
 
 ### Stub format  
 **Delimiter:** _(none)_
@@ -38,7 +38,7 @@ Base62 is used here as a compact encoding alphabet, not as a semantic abbreviati
 | 6  | Assay stub     | `assay.stub_code`           | string          | 1–3 chars                              | codebook value                             |
 | 7  | Condition stub | `condition`                 | code→Base62    | N × 3-char Base62 stubs + 2-digit count (`%02d`)           | packaged ICD-10 order map + 3-char Base62 from integer |
 | 8  | Timepoint stub | `timepoint.stub_code`       | string          | 1–2 chars                              | codebook value                   |
-| 9  | Duration stub  | `duration`                  | string          | digits+unit (e.g. `7W`)                 | `duration_pattern`                         |
+| 9  | Duration stub  | `duration`                  | string          | single digit + unit (e.g. `7W`)         | `duration_pattern`                         |
 | 10 | Batch stub (opt) | `batch`                  | integer         |  `B%02d` (e.g. `B01`)                     | `batch_pattern`                            |
 | 11 | Replicate stub (opt) | `replicate`         | integer         | `R%02d` (e.g. `R05`)                       | `replicate_pattern`                        |
 

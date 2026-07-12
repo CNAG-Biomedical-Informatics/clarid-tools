@@ -17,11 +17,11 @@ Version-pinned copies are kept under
 
 ## 📝 Metadata
 
-Defines global codebook info:
+Example metadata for a project-specific codebook:
 
 ```yaml
 metadata:
-  version: "0.03"         # 🏷️ official ClarID specification version
+  version: "0.04"         # 🏷️ official ClarID specification version
   local_version: "CNAG-GDC-v1"  # 🏷️ project-specific codebook revision (optional)
   author: "M. Rueda"      # 👤 author
   center: "CNAG"          # 🏢 institution
@@ -34,10 +34,18 @@ metadata:
 <summary>About `version`</summary>
 
 `version` identifies the official ClarID specification release targeted by the
-codebook and schema, for example `0.03`. ClarID-Tools compatibility is defined
+codebook and schema, for example `0.04`. ClarID-Tools compatibility is defined
 at this release level.
 
 </details>
+
+:::note[Schema version]
+ClarID-Tools compatibility is checked against `metadata.version` in the YAML
+codebook, not `schemaVersion`. The schema `$id` follows the ClarID release
+family, while `schemaVersion` changes only when the JSON Schema validation
+rules change and may therefore retain an earlier value.
+:::
+
 <details>
 <summary>About `local_version`</summary>
 
