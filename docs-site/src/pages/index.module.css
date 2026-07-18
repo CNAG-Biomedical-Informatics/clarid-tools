@@ -1,53 +1,74 @@
 .page {
   min-height: calc(100vh - var(--ifm-navbar-height));
-  background:
-    radial-gradient(circle at 8% 18%, rgba(255, 255, 255, 0.2), transparent 28rem),
-    radial-gradient(circle at 86% 8%, rgba(184, 107, 51, 0.28), transparent 24rem),
-    linear-gradient(135deg, #143e50 0%, #315f72 48%, #2f6257 100%);
-  color: white;
+  overflow: hidden;
+  background: #f7faf9;
+  color: #16323d;
 }
 
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(4rem, 9vw, 7rem) 1.5rem clamp(3rem, 7vw, 5rem);
+  padding: clamp(4rem, 8vw, 6.5rem) 1.5rem clamp(3.5rem, 7vw, 5.25rem);
+  background:
+    radial-gradient(circle at 8% 18%, rgba(255, 255, 255, 0.18), transparent 28rem),
+    radial-gradient(circle at 88% 0%, rgba(184, 107, 51, 0.3), transparent 25rem),
+    linear-gradient(135deg, #143e50 0%, #315f72 52%, #2f6257 100%);
+  color: white;
+}
+
+.hero::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: "";
+  mask-image: linear-gradient(90deg, transparent, black 55%, black);
 }
 
 .hero::after {
   position: absolute;
-  inset: auto -12rem -18rem auto;
-  width: 34rem;
-  height: 34rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  right: -10rem;
+  bottom: -20rem;
+  width: 36rem;
+  height: 36rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.08) 2px,
-    transparent 2px,
-    transparent 12px
-  );
   content: "";
 }
 
 .heroGrid,
+.flowSection,
 .section,
 .pathSection {
   width: min(1180px, 100%);
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .heroGrid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: clamp(2rem, 6vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
+  gap: clamp(2.5rem, 6vw, 5.25rem);
   align-items: center;
 }
 
+.heroGrid > *,
+.flowHeading > *,
+.sectionTitleRow > *,
+.pathSection > * {
+  min-width: 0;
+}
+
+.copy {
+  position: relative;
+}
+
 .copy h1 {
-  max-width: 880px;
+  max-width: 820px;
   margin: 0;
   font-size: clamp(2.05rem, 4.1vw, 3.8rem);
   line-height: 1.08;
@@ -58,18 +79,26 @@
 .sectionLabel,
 .card span {
   margin: 0 0 0.8rem;
-  color: #ffc489;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
+}
+
+.kicker {
+  color: #ffc489;
+}
+
+.sectionLabel,
+.card span {
+  color: #a85e2b;
 }
 
 .lede {
   max-width: 720px;
   margin: 1.5rem 0 2rem;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 1.12rem;
+  font-size: 1.1rem;
   line-height: 1.62;
 }
 
@@ -106,114 +135,264 @@
 }
 
 .primaryAction:hover {
-  background: #ffd4a3;
   border-color: #ffd4a3;
+  background: #ffd4a3;
   color: #16323d;
   transform: translateY(-1px);
 }
 
 .secondaryAction {
-  border: 1px solid rgba(255, 255, 255, 0.46);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(15, 48, 60, 0.32);
+  color: white;
 }
 
 .secondaryAction:hover {
-  border-color: rgba(255, 255, 255, 0.78);
-  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.12);
   color: white;
   transform: translateY(-1px);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible,
+.pathList a:focus-visible {
+  outline: 3px solid #ffc489;
+  outline-offset: 3px;
 }
 
 .identityCard {
   display: grid;
   gap: 1rem;
-  padding: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 28px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
-    rgba(15, 48, 60, 0.5);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07)),
+    rgba(15, 48, 60, 0.48);
   box-shadow: 0 24px 70px rgba(4, 24, 32, 0.28);
   backdrop-filter: blur(18px);
 }
 
+.identityHeader {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.identityHeader > div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.identityHeader span {
+  color: #ffc489;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.identityHeader strong {
+  color: white;
+  font-size: 0.98rem;
+}
+
 .logo {
-  width: 130px;
-  height: 130px;
+  width: 54px;
+  height: 54px;
+  padding: 3px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.94);
   object-fit: contain;
 }
 
 .identifier {
-  padding: 1rem;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
+  display: block;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.94);
   color: #16323d;
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.segmentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.segmentGrid > div {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.52rem 0.58rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.segmentGrid code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 800;
   overflow-wrap: anywhere;
 }
 
-.tokens {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
+.segmentGrid span {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.66rem;
+  line-height: 1.2;
 }
 
-.tokens span {
-  padding: 0.32rem 0.56rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.74rem;
+.flowSection {
+  padding: clamp(4rem, 8vw, 6rem) 1.5rem 3.5rem;
+}
+
+.flowHeading,
+.sectionTitleRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.75fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: end;
+}
+
+.flowHeading h2,
+.sectionTitleRow h2 {
+  max-width: 700px;
+  margin: 0;
+  color: #16323d;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.flowHeading > p,
+.sectionTitleRow > p {
+  margin: 0 0 0.2rem;
+  color: #59717a;
+  line-height: 1.65;
+}
+
+.diagramFrame {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 2.25rem 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(49, 95, 114, 0.2);
+  border-radius: 16px;
+  background: #fbfdfc;
+  box-shadow: 0 22px 55px rgba(22, 50, 61, 0.09);
+}
+
+.diagramScroller {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.diagramFrame img {
+  display: block;
+  width: 100%;
+  min-width: 820px;
+}
+
+.diagramFrame figcaption {
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid rgba(49, 95, 114, 0.13);
+  background: white;
+  color: #59717a;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .section {
-  padding: 0 1.5rem 3rem;
+  padding: 3.5rem 1.5rem 5rem;
 }
 
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 .card {
-  min-height: 210px;
-  padding: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 44px rgba(4, 24, 32, 0.14);
+  position: relative;
+  min-height: 205px;
+  overflow: hidden;
+  padding: 1.3rem;
+  border: 1px solid rgba(49, 95, 114, 0.18);
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 14px 36px rgba(22, 50, 61, 0.06);
+}
+
+.card::after {
+  position: absolute;
+  right: -2.5rem;
+  bottom: -3.2rem;
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid rgba(49, 95, 114, 0.12);
+  border-radius: 999px;
+  content: "";
 }
 
 .card h2 {
   margin: 0 0 0.75rem;
-  color: white;
-  font-size: 1.3rem;
+  color: #16323d;
+  font-size: 1.22rem;
+  line-height: 1.25;
 }
 
 .card p {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  color: rgba(255, 255, 255, 0.76);
-  line-height: 1.55;
+  color: #59717a;
+  line-height: 1.58;
 }
 
 .pathSection {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 2rem;
-  padding: 2.2rem 1.5rem 4.5rem;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  margin-bottom: 5rem;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border: 1px solid rgba(49, 95, 114, 0.16);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 5% 0%, rgba(184, 107, 51, 0.11), transparent 18rem),
+    #eaf3f1;
 }
 
 .pathSection h2 {
-  max-width: 420px;
+  max-width: 430px;
   margin: 0;
-  color: white;
-  font-size: clamp(2rem, 4vw, 3.3rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  color: #16323d;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.pathIntro {
+  max-width: 400px;
+  margin: 1.15rem 0 0;
+  color: #59717a;
+  line-height: 1.6;
 }
 
 .pathList {
@@ -223,22 +402,26 @@
 
 .pathList a {
   display: grid;
-  grid-template-columns: auto 150px 1fr;
+  grid-template-columns: auto 145px 1fr;
   gap: 1rem;
   align-items: center;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
+  border: 1px solid rgba(49, 95, 114, 0.17);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #16323d;
   text-decoration: none;
+  box-shadow: 0 9px 24px rgba(22, 50, 61, 0.045);
   transition:
-    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
     transform 160ms ease;
 }
 
 .pathList a:hover {
-  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(184, 107, 51, 0.5);
+  box-shadow: 0 13px 28px rgba(22, 50, 61, 0.08);
+  color: #16323d;
   transform: translateY(-1px);
 }
 
@@ -248,34 +431,128 @@
   height: 2.2rem;
   place-items: center;
   border-radius: 999px;
-  background: #ffc489;
-  color: #16323d;
-  font-size: 0.78rem;
+  background: #16323d;
+  color: white;
+  font-size: 0.76rem;
   font-weight: 900;
 }
 
 .pathList small {
-  color: rgba(255, 255, 255, 0.74);
+  color: #59717a;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+:global([data-theme='dark']) .page {
+  background: #101d23;
+  color: #e6edef;
+}
+
+:global([data-theme='dark']) .flowHeading h2,
+:global([data-theme='dark']) .sectionTitleRow h2,
+:global([data-theme='dark']) .card h2,
+:global([data-theme='dark']) .pathSection h2 {
+  color: #f0f5f6;
+}
+
+:global([data-theme='dark']) .flowHeading > p,
+:global([data-theme='dark']) .sectionTitleRow > p,
+:global([data-theme='dark']) .card p,
+:global([data-theme='dark']) .pathIntro {
+  color: #b6c6cb;
+}
+
+:global([data-theme='dark']) .card {
+  border-color: rgba(196, 219, 224, 0.14);
+  background: #172a32;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+}
+
+:global([data-theme='dark']) .pathSection {
+  border-color: rgba(196, 219, 224, 0.14);
+  background:
+    radial-gradient(circle at 5% 0%, rgba(184, 107, 51, 0.16), transparent 18rem),
+    #15272e;
+}
+
+:global([data-theme='dark']) .pathList a {
+  border-color: rgba(196, 219, 224, 0.14);
+  background: #1b3038;
+  color: #edf3f4;
+}
+
+:global([data-theme='dark']) .pathList a:hover {
+  color: white;
+}
+
+:global([data-theme='dark']) .pathList span {
+  background: #ffc489;
+  color: #16323d;
+}
+
+:global([data-theme='dark']) .pathList small {
+  color: #b6c6cb;
 }
 
 @media (max-width: 980px) {
   .heroGrid,
+  .flowHeading,
+  .sectionTitleRow,
   .pathSection {
     grid-template-columns: 1fr;
   }
 
   .identityCard {
-    max-width: 480px;
+    max-width: 620px;
   }
 
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .pathSection {
+    width: calc(100% - 3rem);
+  }
 }
 
 @media (max-width: 640px) {
-  .cardGrid,
-  .pathList a {
+  .hero {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .flowSection,
+  .section {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .cardGrid {
     grid-template-columns: 1fr;
+  }
+
+  .pathSection {
+    width: calc(100% - 2rem);
+    margin-bottom: 3rem;
+  }
+
+  .pathList a {
+    grid-template-columns: auto 1fr;
+  }
+
+  .pathList small {
+    grid-column: 2;
+  }
+
+  .diagramFrame img {
+    min-width: 760px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction,
+  .pathList a {
+    transition: none;
   }
 }

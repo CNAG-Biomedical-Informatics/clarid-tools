@@ -1,144 +1,140 @@
-# 📘 ClarID Codebook Documentation
+# 📘 Codebook and Schema
 
-## Overview
+The ClarID YAML codebook maps project vocabulary to the values used in
+human-readable and stub identifiers. The bundled JSON Schema checks its
+structure before ClarID-Tools encodes or decodes data.
 
-This codebook defines a standardized encoding system for species, biosample metadata, assay types, conditions, and other identifiers in the **ClarID** project. It provides a mapping between human-readable labels and compact codes or stub codes for use in structured identifiers and databases.
+## Reference Files
 
-<details>
-<summary>See Codebook:</summary>
+| Resource | Stable path | Purpose |
+|---|---|---|
+| Reference codebook | `share/clarid-codebook.yaml` | Default vocabulary and encoding values |
+| JSON Schema | `share/clarid-codebook-schema.json` | Structural validation rules |
+| Versioned resources | `share/versions/<release>/` | Release-pinned codebooks and schemas |
 
-The bundled reference codebook is available in the repository at
-[`share/clarid-codebook.yaml`](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/share/clarid-codebook.yaml).
-Version-pinned copies are kept under
-[`share/versions/`](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/tree/main/share/versions).
+The stable paths are relative symbolic links to the resources shipped for the
+latest ClarID release. The files can also be inspected directly in the
+repository:
 
-</details>
----
+- [Reference codebook](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/share/clarid-codebook.yaml)
+- [JSON Schema](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/blob/main/share/clarid-codebook-schema.json)
+- [Versioned resources](https://github.com/CNAG-Biomedical-Informatics/clarid-tools/tree/main/share/versions)
+
+Validate a codebook before using it in a workflow:
+
+```bash
+clarid-tools validate --codebook share/clarid-codebook.yaml
+```
 
 ## 📝 Metadata
 
-Example metadata for a project-specific codebook:
+The metadata section records the ClarID release and the provenance of a
+codebook:
 
 ```yaml
 metadata:
-  version: "0.04"         # 🏷️ official ClarID specification version
-  local_version: "CNAG-GDC-v1"  # 🏷️ project-specific codebook revision (optional)
-  author: "M. Rueda"      # 👤 author
-  center: "CNAG"          # 🏢 institution
-  date: "2026-04-01"      # 📅 YYYY-MM-DD
-  description: "ClarID codebook"  # 📝 summary
-  repository: "https://github.com/cnag-biomedical-informatics/clarid-tools"  # 🔗 repo URL
+  version: "0.04"                    # Official ClarID release
+  local_version: "CNAG-GDC-v1"      # Project revision (optional)
+  author: "M. Rueda"
+  center: "CNAG"
+  date: "2026-04-01"                 # YYYY-MM-DD
+  description: "ClarID codebook"
+  repository: "https://github.com/cnag-biomedical-informatics/clarid-tools"
 ```
 
-<details>
-<summary>About `version`</summary>
-
 `version` identifies the official ClarID specification release targeted by the
-codebook and schema, for example `0.04`. ClarID-Tools compatibility is defined
-at this release level.
+codebook. ClarID-Tools uses this value for compatibility checks.
 
-</details>
+`local_version` distinguishes project-specific codebook revisions that retain
+the same ClarID structure but change controlled vocabularies, aliases, or local
+dictionary values.
 
 :::note[Schema version]
-ClarID-Tools compatibility is checked against `metadata.version` in the YAML
-codebook, not `schemaVersion`. The schema `$id` follows the ClarID release
-family, while `schemaVersion` changes only when the JSON Schema validation
-rules change and may therefore retain an earlier value.
+Compatibility is checked against `metadata.version` in the codebook, not
+`schemaVersion` in the JSON Schema. The schema `$id` follows the ClarID release,
+while `schemaVersion` changes only when the validation rules change. It may
+therefore retain an earlier value across ClarID releases.
 :::
-
-<details>
-<summary>About `local_version`</summary>
-
-`local_version` is optional and can be used for ad hoc or project-specific
-codebook variants without changing the official ClarID specification version.
-This is useful when different projects need their own controlled vocabularies,
-aliases, or dictionary updates while still conforming to the same ClarID
-release.
-
-</details>
----
 
 ## 🌐 Entities
 
-All under `entities:`.
-
-### 🔄 `_defaults`
-Fallback when no match:
+All encoding vocabulary lives under `entities`. Global fall-through entries
+provide explicit values for unknown or unavailable metadata:
 
 ```yaml
 entities:
-  _defaults:
-    Unknown:
-      code:       UNK
-      stub_code:  U
-      label:      "Unknown"
-      id:         "NCIT:C17998"
+  _defaults: &defaults
+    "Unknown":
+      code: UNK
+      stub_code: U
+      label: "Unknown"
+      id: "NCIT:C17998"
     "Not Available":
-      code:       NAV
-      stub_code:  n
-      label:      "Not Available"
-      id:         "NCIT:C126101"
+      code: NAV
+      stub_code: n
+      label: "Not Available"
+      id: "NCIT:C126101"
 ```
 
----
+Each vocabulary key is an accepted input value. `code` is used in the
+human-readable identifier, `stub_code` in the compact identifier, `label` for
+display, and `id` for an external ontology or terminology reference.
 
-## 🛠️ `biosample`
+## 🧬 Biosample
 
-### 📁 project
+### Project
+
+The reference codebook anchors the project map so that subject `study` entries
+can reuse it:
+
 ```yaml
 entities:
   biosample:
     project: &all_projects
       "TCGA-AML":
-        code:      TCGA_AML
+        code: TCGA_AML
         stub_code: AML
-        label:     "TCGA Acute Myeloid Leukemia"
-        id:         "NCIT:C17998" # Unknown
+        label: "TCGA Acute Myeloid Leukemia"
+        id: "NCIT:C17998"
+```
+
+### Species
+
+```yaml
+entities:
+  biosample:
+    species:
+      Human:
+        code: HomSap
+        stub_code: "01"
+        label: "Homo sapiens"
+        id: "NCBITaxon:9606"
+        tax_code: MPH
 ```
 
 <details>
-<summary>About `species`:</summary>
+<summary>Species code convention</summary>
 
+The reference vocabulary follows the convention described by Schrade et al. in
+*Animals* (2024), Table 2:
 
-> **Reference**: Based on Schrade et al., *Animals* 2024, Table 2.
+- `tax_code` is a three-letter class, order, and family classification, such as
+  `MPC` for Mammalia, Primates, and Cercopithecidae.
+- `code` is a six-letter binomial acronym formed from three letters of the genus
+  and three letters of the species, such as `MacMul` for *Macaca mulatta*.
+- `stub_code` is a static compact species value defined by the codebook. The
+  reference codebook uses two characters, such as `01` for *Homo sapiens*.
 
-
-🧬 Component I: Species Information
-
-Each species entry is defined by two key elements:
-
-- **Element 1 (positions 1–3)**: `tax_code`
-  A 3-letter taxonomic classification code:
-  - 1st letter: Class
-  - 2nd letter: Order
-  - 3rd letter: Family
-  - Example: `MPC` = *Mammalia | Primates | Cercopithecidae*
-
-- **Element 2 (positions 5–10)**: `code`
-  A 6-letter binomial acronym formed by:
-  - 3 letters from the genus name
-  - 3 letters from the species name
-  - Example: `MacMul` = *Macaca mulatta*
-
-- **`stub_code`**: A 2-character Base-62 encoded unique species identifier
-(e.g. `"01"` for *Homo sapiens*, `"0E"` for *Macaca mulatta*)
-
-Note: `tax_code` is provided as metadata and is not used in encode/decode logic.
+`tax_code` is retained as metadata and is not used by the encoder or decoder.
+Species stub codes must use a consistent width within a codebook.
 
 </details>
-### 🧬 species
-```yaml
-    species:
-      Human:
-        code: HomSap        # 🆔 binomial acronym
-        stub_code: "01"     # 🔢 index
-        label: "Homo sapiens"  # 📖 name
-        id: "NCBITaxon:9606"  # 🔗 taxonomy
-        tax_code: MPH       # 🏷️ class|order|family
-```
 
-### 🏥 tissue
+### Tissue
+
 ```yaml
+entities:
+  biosample:
     tissue:
       Liver:
         code: LIV
@@ -147,8 +143,11 @@ Note: `tax_code` is provided as metadata and is not used in encode/decode logic.
         id: "UBERON:0002107"
 ```
 
-### 🧪 sample_type
+### Sample Type
+
 ```yaml
+entities:
+  biosample:
     sample_type:
       Tumor:
         code: TUM
@@ -157,77 +156,138 @@ Note: `tax_code` is provided as metadata and is not used in encode/decode logic.
         id: "NCIT:C4872"
 ```
 
-### 🔬 assay
+### Assay
+
 ```yaml
+entities:
+  biosample:
     assay:
       RNA_seq:
-        code:       RNA
-        stub_code:  R
-        label:      "RNA-seq"
-        id:         "EFO:0008896"
+        code: RNA
+        stub_code: R
+        label: "RNA-seq"
+        id: "EFO:0008896"
 ```
 
-### ⏰ timepoint
+### Timepoint
+
 ```yaml
+entities:
+  biosample:
     timepoint:
       Baseline:
-        code:       BSL
-        stub_code:  "B"
-        label:      "Baseline"
-        id:         "NCIT:C25213"
+        code: BSL
+        stub_code: B
+        label: "Baseline"
+        id: "NCIT:C25213"
 ```
 
----
+### Pattern-Based Fields
 
-## 🔍 Patterns
-
-Regex-based formats:
+Patterns validate values that are not selected from a vocabulary map and define
+their human and stub formatting:
 
 ```yaml
-    condition_pattern:
-      regex: '^([A-Z]\d{2}(?:\.\d+)?)$'  # ✅ Letter+digits
+entities:
+  biosample:
+    condition_pattern: &condition_pattern
+      regex: '^([A-Z]\d{2}(?:\.\d+)?)$'
       code_format: '%s'
       stub_format: '%s'
+
+    duration_pattern:
+      regex: '^(?:P?(\d)([DWMY])|P?(0)(N))$'
+      code_format: 'P%d%s'
+      stub_format: '%d%s'
+
+    batch_pattern:
+      regex: '^(\d{1,2})$'
+      code_format: 'B%02d'
+      stub_format: 'B%02d'
+
+    replicate_pattern:
+      regex: '^(\d{1,2})$'
+      code_format: 'R%02d'
+      stub_format: 'R%02d'
 ```
 
----
+The duration pattern intentionally accepts a single digit and one unit, or
+`P0N`. See the [Specification](./specification.md) for the resulting identifier
+fields.
 
-## 👥 Subject
+## 👤 Subject
 
-### 🔄 study
-Reuses `biosample.project`:
+The reference codebook reuses the project map as `study` and the biosample
+condition pattern through YAML aliases:
 
 ```yaml
+entities:
   subject:
     study: *all_projects
+    condition_pattern: *condition_pattern
 ```
 
-### 🧑‍🤝‍🧑 type, sex, age_group
+Subject-specific controlled vocabularies use the same entry structure:
+
 ```yaml
+entities:
+  subject:
+    type:
       Case:
-        code:       Case
-        stub_code:  C
-        label:      "Case Study"
-        id:         "NCIT:C15362"
-      sex:
+        code: Case
+        stub_code: C
+        label: "Case Study"
+        id: "NCIT:C15362"
+
+    sex:
       Male:
-        code:       Male
-        stub_code:  M
-        label:      "Male"
-        id:         "PATO:0000384"
-      age_group:
-        Age20to29:
-          code:       A20_29
-          stub_code:  A2
-          label:      "Age 20-29"
-          id:         "APOLLO:SV_00000241" # age range category
+        code: Male
+        stub_code: M
+        label: "Male"
+        id: "PATO:0000384"
 
+    age_group:
+      Age20to29:
+        code: A20_29
+        stub_code: A2
+        label: "Age 20-29"
+        id: "APOLLO:SV_00000241"
 ```
-<details>
-<summary>Naming conventions</summary>
 
-Vocabulary keys under `biosample` and `subject` (e.g. `RhesusMacaque`, `PeripheralBlood`) use CamelCase; attributes (e.g. `code`, `stub_code`, `tax_code`) use snake_case.  
-Rationale: CamelCase keeps multi-word names compact and avoids confusion with attributes.  
-**Exceptions:** some keys (e.g. `"Not Available"`, `RNA_seq`) keep original style for clarity or compatibility.
+## Project-Specific Codebooks
 
-</details>
+1. Copy the codebook associated with the ClarID release used by your software.
+2. Keep `metadata.version` unchanged and set a meaningful `local_version`.
+3. Add or edit vocabulary entries without changing the required hierarchy.
+4. Validate the resulting file.
+5. Pass it through `--codebook` when encoding or decoding.
+
+```bash
+cp share/versions/0.04/clarid-codebook.yaml project-codebook.yaml
+clarid-tools validate --codebook project-codebook.yaml
+clarid-tools code \
+  --codebook project-codebook.yaml \
+  --entity biosample \
+  --action encode \
+  --format human \
+  --infile project-input.csv
+```
+
+:::warning[Keep codebooks with generated identifiers]
+ClarID identifiers store the mapped `code` or `stub_code`, not the original
+vocabulary key. If a mapping changes, the same input metadata can produce a
+different identifier, and identifiers created previously may no longer decode
+correctly with the revised codebook. Keep the codebook used for encoding under
+version control and record its `local_version` with the corresponding data or
+workflow.
+:::
+
+## Naming Conventions
+
+- Vocabulary keys generally use CamelCase, such as `RhesusMacaque` and
+  `PeripheralBlood`.
+- Attributes use snake_case, such as `stub_code` and `tax_code`.
+- Established values such as `RNA_seq` and `Not Available` retain their
+  spelling for compatibility.
+- Codes already used in identifiers should not be reassigned to a different
+  meaning.

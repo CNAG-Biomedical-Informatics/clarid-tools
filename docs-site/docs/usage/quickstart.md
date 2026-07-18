@@ -39,9 +39,20 @@ bulk CSV processing, QR-code generation, and codebook validation.
 
 ## Code Mode
 
-## Biosample
+### Biosample
 
-### Human Format
+#### Human Format
+
+The diagram shows the core nine-field biosample form. Optional `batch` and
+`replicate` fields are appended after `duration`, as demonstrated in the command
+below.
+
+<figure className="claridDiagram">
+
+![Anatomy of a human-readable ClarID biosample identifier](../../static/img/clarid-identifier-anatomy.svg)
+
+<figcaption>Each segment has a fixed role, with controlled abbreviations supplied by the codebook.</figcaption>
+</figure>
 
 ```bash
 # Encode one biosample with the CLI
@@ -245,9 +256,9 @@ replicate: 5
 </details>
 ---
 
-## Subject
+### Subject
 
-### Human Format
+#### Human Format
 
 ```bash
 # Bulk encode
@@ -296,7 +307,7 @@ patient_004,AsthmaCohort-01004-Case-J98.51-Male-A40_49,AsthmaCohort,1004,Case,J9
 ```
 
 </details>
-### Stub Format
+#### Stub Format
 
 ```bash
 # Bulk encode
@@ -349,7 +360,7 @@ First we will create a directory to write the PNGs (default is `qrcodes/`):
 mkdir qrcodes_dir
 ```
 
-## Biosample
+### Biosample
 
 Now we convert all `clar_id` records in `ex/biosample_to_decode.csv`:
 
@@ -385,7 +396,7 @@ When encoding values into QR code PNGs, the script sanitizes each value to creat
    --column clar_id
  ```
 
-## Subject
+### Subject
 
 ```bash
 # Bulk encode to QR

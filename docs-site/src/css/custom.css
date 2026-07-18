@@ -14,6 +14,48 @@
   --clarid-accent: #b86b33;
 }
 
+body {
+  background:
+    linear-gradient(180deg, rgba(238, 246, 244, 0.45), transparent 22rem),
+    var(--ifm-background-color);
+}
+
+.navbar {
+  border-bottom: 1px solid var(--clarid-line);
+  box-shadow: 0 4px 18px rgba(22, 50, 61, 0.055);
+}
+
+.navbar__logo {
+  display: inline-grid;
+  width: 2.15rem;
+  height: 2.15rem;
+  place-items: center;
+  margin-right: 0.6rem;
+  border: 1px solid var(--clarid-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.navbar__logo img {
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
+.theme-doc-markdown {
+  line-height: 1.72;
+}
+
+.theme-doc-markdown > h2 {
+  margin-top: 2.8rem;
+  padding-top: 0.25rem;
+  letter-spacing: -0.025em;
+}
+
+.theme-doc-markdown > h3 {
+  margin-top: 2rem;
+  letter-spacing: -0.015em;
+}
+
 .markdown figure {
   text-align: center;
 }
@@ -30,9 +72,42 @@
   text-align: center;
 }
 
-.markdown table {
-  display: table;
+.claridDiagram {
+  margin: 1.6rem 0 2.4rem;
+  overflow: hidden;
+  border: 1px solid var(--clarid-line);
+  border-radius: 14px;
+  background: #fbfdfc;
+  box-shadow: 0 18px 44px rgba(22, 50, 61, 0.075);
+}
+
+.claridDiagram > p {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.claridDiagram img {
+  display: block;
   width: 100%;
+  min-width: 780px;
+  margin: 0;
+}
+
+.claridDiagram figcaption {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--clarid-line);
+  background: #fff;
+  color: #59717a;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.markdown table:not([class]) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .tablePreview {
@@ -479,6 +554,69 @@
   margin-top: 0;
 }
 
+[data-theme='dark'] {
+  --clarid-ink: #eef4f5;
+  --clarid-muted: #b7c6cb;
+  --clarid-wash: #172b32;
+  --clarid-line: rgba(191, 214, 220, 0.16);
+  --clarid-accent: #e29a63;
+}
+
+[data-theme='dark'] body {
+  background:
+    linear-gradient(180deg, rgba(49, 95, 114, 0.13), transparent 22rem),
+    var(--ifm-background-color);
+}
+
+[data-theme='dark'] .navbar__logo {
+  background: #f7faf9;
+}
+
+[data-theme='dark'] .claridDocHero,
+[data-theme='dark'] .claridQuickHero {
+  background:
+    radial-gradient(circle at 84% 14%, rgba(226, 154, 99, 0.13), transparent 28%),
+    linear-gradient(135deg, #172b33 0%, #1b343b 58%, #2a302d 100%);
+}
+
+[data-theme='dark'] .claridCliHero {
+  background:
+    radial-gradient(circle at 84% 14%, rgba(92, 144, 164, 0.16), transparent 28%),
+    linear-gradient(135deg, #172b33 0%, #1a3037 58%, #202d36 100%);
+}
+
+[data-theme='dark'] .claridCommandMap a,
+[data-theme='dark'] .claridCard,
+[data-theme='dark'] .claridNotePanel,
+[data-theme='dark'] .claridSplit > div,
+[data-theme='dark'] .claridSetupDetails,
+[data-theme='dark'] .claridAboutGrid article,
+[data-theme='dark'] .claridPeopleGrid article,
+[data-theme='dark'] .claridAboutCallout,
+[data-theme='dark'] .claridCitationCard,
+[data-theme='dark'] .claridFundingPanel {
+  background: #172a32;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+}
+
+[data-theme='dark'] .claridNotePanel,
+[data-theme='dark'] .claridAboutCallout,
+[data-theme='dark'] .claridCitationCard {
+  background:
+    linear-gradient(90deg, rgba(92, 144, 164, 0.1), transparent 58%),
+    #172a32;
+}
+
+[data-theme='dark'] .claridPath a {
+  background: linear-gradient(90deg, #172a32, #1a3036);
+}
+
+[data-theme='dark'] .claridPath span,
+[data-theme='dark'] .claridCommandMap span {
+  background: #ffc489;
+  color: #16323d;
+}
+
 @media (max-width: 760px) {
   .claridCardGrid,
   .claridSplit,
@@ -494,5 +632,9 @@
 
   .claridPath small {
     grid-column: 2;
+  }
+
+  .claridDiagram img {
+    min-width: 720px;
   }
 }

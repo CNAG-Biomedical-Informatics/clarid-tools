@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" role="img" aria-labelledby="title description">
+  <title id="title">Anatomy of a human-readable ClarID biosample identifier</title>
+  <desc id="description">The identifier CNAG_Test-HomSap-00042-LIV-TUM-RNA-C15.3-TRT-P1M is divided into project, species, subject, tissue, sample type, assay, condition, timepoint, and duration fields.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#16323d" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="340" fill="#fbfdfc"/>
+  <g font-family="Trebuchet MS, Arial, sans-serif">
+    <text x="110" y="37" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">HUMAN-READABLE BIOSAMPLE FORMAT</text>
+    <text x="1090" y="37" fill="#72868e" font-size="11" text-anchor="end">Fields are separated with hyphens</text>
+
+    <g filter="url(#shadow)" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" text-anchor="middle">
+      <rect x="110" y="65" width="150" height="58" rx="8" fill="#dcecf1" stroke="#315f72"/>
+      <text x="185" y="100" fill="#16323d">CNAG_Test</text>
+      <rect x="280" y="65" width="115" height="58" rx="8" fill="#dcecf1" stroke="#315f72"/>
+      <text x="337.5" y="100" fill="#16323d">HomSap</text>
+      <rect x="415" y="65" width="95" height="58" rx="8" fill="#dcecf1" stroke="#315f72"/>
+      <text x="462.5" y="100" fill="#16323d">00042</text>
+
+      <rect x="530" y="65" width="72" height="58" rx="8" fill="#e2f0eb" stroke="#2f6257"/>
+      <text x="566" y="100" fill="#214f44">LIV</text>
+      <rect x="622" y="65" width="72" height="58" rx="8" fill="#e2f0eb" stroke="#2f6257"/>
+      <text x="658" y="100" fill="#214f44">TUM</text>
+      <rect x="714" y="65" width="72" height="58" rx="8" fill="#e2f0eb" stroke="#2f6257"/>
+      <text x="750" y="100" fill="#214f44">RNA</text>
+
+      <rect x="806" y="65" width="100" height="58" rx="8" fill="#fae9dc" stroke="#b86b33"/>
+      <text x="856" y="100" fill="#8b4a20">C15.3</text>
+      <rect x="926" y="65" width="72" height="58" rx="8" fill="#fae9dc" stroke="#b86b33"/>
+      <text x="962" y="100" fill="#8b4a20">TRT</text>
+      <rect x="1018" y="65" width="72" height="58" rx="8" fill="#fae9dc" stroke="#b86b33"/>
+      <text x="1054" y="100" fill="#8b4a20">P1M</text>
+    </g>
+
+    <g fill="#81939a" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" font-weight="700" text-anchor="middle">
+      <text x="270" y="100">-</text>
+      <text x="405" y="100">-</text>
+      <text x="520" y="100">-</text>
+      <text x="612" y="100">-</text>
+      <text x="704" y="100">-</text>
+      <text x="796" y="100">-</text>
+      <text x="916" y="100">-</text>
+      <text x="1008" y="100">-</text>
+    </g>
+
+    <g fill="#5f747c" font-size="10.5" font-weight="700" text-anchor="middle">
+      <text x="185" y="148">PROJECT</text>
+      <text x="337.5" y="148">SPECIES</text>
+      <text x="462.5" y="148">SUBJECT ID</text>
+      <text x="566" y="148">TISSUE</text>
+      <text x="658" y="148">SAMPLE TYPE</text>
+      <text x="750" y="148">ASSAY</text>
+      <text x="856" y="148">CONDITION</text>
+      <text x="962" y="148">TIMEPOINT</text>
+      <text x="1054" y="148">DURATION</text>
+    </g>
+
+    <g>
+      <rect x="110" y="185" width="400" height="92" rx="10" fill="#eef5f7" stroke="#c4d7dc"/>
+      <rect x="110" y="185" width="6" height="92" rx="3" fill="#315f72"/>
+      <text x="135" y="218" fill="#315f72" font-size="12" font-weight="700" letter-spacing="0.8">IDENTITY CORE</text>
+      <text x="135" y="246" fill="#526b74" font-size="13">Project, species, and stable subject number</text>
+
+      <rect x="530" y="185" width="256" height="92" rx="10" fill="#edf6f2" stroke="#c4dbd3"/>
+      <rect x="530" y="185" width="6" height="92" rx="3" fill="#2f6257"/>
+      <text x="555" y="218" fill="#2f6257" font-size="12" font-weight="700" letter-spacing="0.8">BIOSPECIMEN</text>
+      <text x="555" y="244" fill="#526b74" font-size="12">Tissue, sample type,</text>
+      <text x="555" y="262" fill="#526b74" font-size="12">and assay</text>
+
+      <rect x="806" y="185" width="284" height="92" rx="10" fill="#fdf3eb" stroke="#ead0bd"/>
+      <rect x="806" y="185" width="6" height="92" rx="3" fill="#b86b33"/>
+      <text x="831" y="218" fill="#a45d2b" font-size="12" font-weight="700" letter-spacing="0.8">CLINICAL CONTEXT</text>
+      <text x="831" y="244" fill="#526b74" font-size="12">Condition, event, and</text>
+      <text x="831" y="262" fill="#526b74" font-size="12">elapsed duration</text>
+    </g>
+
+    <line x1="110" y1="307" x2="1090" y2="307" stroke="#d8e4e2"/>
+    <text x="110" y="326" fill="#6c8087" font-size="11">Optional batch and replicate fields can be appended after duration.</text>
+  </g>
+</svg>

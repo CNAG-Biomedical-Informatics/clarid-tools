@@ -1,4 +1,8 @@
-# ClarID Specification Tables
+# ClarID Specification
+
+The tables below define the exact source fields, constraints, and encoding rules
+for the human-readable and stub formats of both `biosample` and `subject`
+identifiers.
 
 ## Biosample
 

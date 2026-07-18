@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title description">
+  <title id="title">ClarID encoding workflow</title>
+  <desc id="description">Structured biosample metadata and a schema-validated codebook are processed by ClarID-Tools to produce both a human-readable identifier and a compact stub identifier.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#78909b"/>
+    </marker>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="#dfe9e7" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#16323d" flood-opacity="0.09"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="430" fill="#fbfdfc"/>
+  <rect width="1200" height="430" fill="url(#grid)" opacity="0.45"/>
+
+  <g font-family="Trebuchet MS, Arial, sans-serif">
+    <text x="45" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">STRUCTURED METADATA</text>
+    <text x="420" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">VERSIONED RULES</text>
+    <text x="805" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">TWO COMPLEMENTARY OUTPUTS</text>
+
+    <g filter="url(#shadow)">
+      <rect x="45" y="65" width="300" height="300" rx="12" fill="#ffffff" stroke="#b8ccd1"/>
+      <path d="M45 77a12 12 0 0 1 12-12h276a12 12 0 0 1 12 12v42H45Z" fill="#eaf3f5"/>
+      <circle cx="68" cy="92" r="5" fill="#315f72"/>
+      <text x="84" y="97" fill="#16323d" font-size="16" font-weight="700">biosample.csv</text>
+      <text x="315" y="96" fill="#68808a" font-size="11" text-anchor="end">one row</text>
+    </g>
+
+    <g font-size="13">
+      <g fill="#6a7f87">
+        <text x="65" y="151">project</text>
+        <text x="65" y="188">species</text>
+        <text x="65" y="225">subject_id</text>
+        <text x="65" y="262">tissue</text>
+        <text x="65" y="299">assay</text>
+        <text x="65" y="336">condition</text>
+      </g>
+      <g fill="#16323d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-weight="700">
+        <text x="190" y="151">CNAG-Test</text>
+        <text x="190" y="188">Human</text>
+        <text x="190" y="225">42</text>
+        <text x="190" y="262">Liver</text>
+        <text x="190" y="299">RNA_seq</text>
+        <text x="190" y="336">C15.3</text>
+      </g>
+      <g stroke="#e2eaec">
+        <line x1="65" y1="164" x2="325" y2="164"/>
+        <line x1="65" y1="201" x2="325" y2="201"/>
+        <line x1="65" y1="238" x2="325" y2="238"/>
+        <line x1="65" y1="275" x2="325" y2="275"/>
+        <line x1="65" y1="312" x2="325" y2="312"/>
+      </g>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="420" y="65" width="300" height="112" rx="12" fill="#ffffff" stroke="#b8ccd1"/>
+      <rect x="442" y="87" width="48" height="58" rx="6" fill="#e5f1ed" stroke="#57907e"/>
+      <path d="M478 87v13h12" fill="#d4e7e1" stroke="#57907e"/>
+      <path d="M452 115h28M452 125h20M452 135h24" stroke="#57907e" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <text x="508" y="105" fill="#16323d" font-size="15" font-weight="700">clarid-codebook.yaml</text>
+    <text x="508" y="128" fill="#627982" font-size="12">Vocabulary mappings and stub codes</text>
+    <rect x="508" y="140" width="126" height="22" rx="11" fill="#eef6f4"/>
+    <text x="571" y="155" fill="#2f6257" font-size="10" font-weight="700" text-anchor="middle">SCHEMA VALIDATED</text>
+
+    <g filter="url(#shadow)">
+      <rect x="430" y="235" width="280" height="105" rx="12" fill="#163e4e" stroke="#315f72"/>
+      <rect x="450" y="256" width="240" height="38" rx="7" fill="#ffffff" fill-opacity="0.1"/>
+    </g>
+    <text x="570" y="280" fill="#ffffff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" font-weight="700" text-anchor="middle">clarid-tools code</text>
+    <text x="570" y="318" fill="#c9dadd" font-size="12" text-anchor="middle">validate, normalize, encode</text>
+
+    <g fill="none" stroke="#78909b" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M345 270H410"/>
+      <path d="M570 177V222"/>
+      <path d="M710 270H760V140H792"/>
+      <path d="M710 292H792"/>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="805" y="65" width="350" height="150" rx="12" fill="#ffffff" stroke="#b8ccd1"/>
+      <rect x="805" y="65" width="7" height="150" rx="3.5" fill="#b86b33"/>
+    </g>
+    <text x="830" y="94" fill="#a45d2b" font-size="11" font-weight="700" letter-spacing="1">HUMAN</text>
+    <text x="830" y="126" fill="#16323d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700">CNAG_Test-HomSap-00042-</text>
+    <text x="830" y="150" fill="#16323d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700">LIV-TUM-RNA-C15.3-TRT-P1M</text>
+    <text x="830" y="185" fill="#687e86" font-size="12">Readable context for review and filenames</text>
+
+    <g filter="url(#shadow)">
+      <rect x="805" y="235" width="350" height="130" rx="12" fill="#ffffff" stroke="#b8ccd1"/>
+      <rect x="805" y="235" width="7" height="130" rx="3.5" fill="#2f6257"/>
+    </g>
+    <text x="830" y="264" fill="#2f6257" font-size="11" font-weight="700" letter-spacing="1">STUB</text>
+    <text x="830" y="300" fill="#16323d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700">CT0100gLTR0MP01T1M</text>
+    <text x="830" y="335" fill="#687e86" font-size="12">Compact form for labels and QR codes</text>
+
+    <rect x="420" y="387" width="735" height="25" rx="12.5" fill="#edf4f2"/>
+    <circle cx="441" cy="399.5" r="6" fill="#2f6257"/>
+    <path d="M438 399.5l2 2 4-5" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="455" y="404" fill="#506970" font-size="11">Both identifiers are generated from the same metadata and codebook.</text>
+  </g>
+</svg>

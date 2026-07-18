@@ -46,18 +46,10 @@ generation.
 
 If wording in the paper and implementation documentation ever diverge, the paper should be treated as the conceptual description and this documentation as the operational guide for the current software release.
 
-## Developers
+## Development
 
-<div class="claridPeopleGrid">
-  <article>
-    <span>CLI + Module</span>
-    <strong><a href="https://github.com/mrueda">Manuel Rueda</a></strong>
-  </article>
-  <article>
-    <span>Documentation</span>
-    <strong><a href="https://github.com/mrueda">Manuel Rueda</a></strong>
-  </article>
-</div>
+ClarID-Tools is developed and maintained by
+[Manuel Rueda](https://github.com/mrueda) at CNAG.
 
 ## Acknowledgments
 
