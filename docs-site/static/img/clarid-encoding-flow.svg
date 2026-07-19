@@ -19,7 +19,7 @@
   <g font-family="Trebuchet MS, Arial, sans-serif">
     <text x="45" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">STRUCTURED METADATA</text>
     <text x="420" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">VERSIONED RULES</text>
-    <text x="805" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">TWO COMPLEMENTARY OUTPUTS</text>
+    <text x="805" y="38" fill="#526b74" font-size="13" font-weight="700" letter-spacing="1.2">ENCODED OUTPUTS</text>
 
     <g filter="url(#shadow)">
       <rect x="45" y="65" width="300" height="300" rx="12" fill="#ffffff" stroke="#b8ccd1"/>

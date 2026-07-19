@@ -23,32 +23,40 @@ export default function Home(): React.ReactElement {
   return (
     <Layout
       title="ClarID-Tools"
-      description="Human-readable identifiers for biomedical metadata">
+      description="Reference implementation of the ClarID identifier specification">
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroGrid}>
             <div className={styles.copy}>
-              <p className={styles.kicker}>ClarID-Tools</p>
-              <h1>Human-readable identifiers for biomedical metadata</h1>
+              <p className={styles.kicker}>ClarID reference implementation</p>
+              <h1>ClarID-Tools</h1>
+              <p className={styles.claim}>
+                Human-readable and compact identifiers for biomedical metadata
+              </p>
               <p className={styles.lede}>
-                Encode and decode subject and biosample identifiers with a versioned
-                codebook, schema validation, and reproducible command-line workflows.
+                A command-line implementation for encoding and decoding subject and
+                biosample identifiers using versioned YAML codebooks and schema validation.
               </p>
               <div className={styles.actions}>
                 <Link className={styles.primaryAction} to="/usage/quickstart">
                   Quickstart
                 </Link>
                 <Link className={styles.secondaryAction} to="/technical-details/specification">
-                  Read the specification
+                  Specification
                 </Link>
+                <a
+                  className={styles.paperAction}
+                  href="https://link.springer.com/article/10.1186/s13326-026-00349-6">
+                  Published paper
+                </a>
               </div>
             </div>
             <div className={styles.identityCard} aria-label="ClarID identifier example">
               <div className={styles.identityHeader}>
                 <img className={styles.logo} src={logo} alt="" />
                 <div>
-                  <span>Biosample example</span>
-                  <strong>Nine fields, one identifier</strong>
+                  <span>Illustrative biosample</span>
+                  <strong>Human-readable format</strong>
                 </div>
               </div>
               <code className={styles.identifier}>
@@ -69,12 +77,12 @@ export default function Home(): React.ReactElement {
         <section className={styles.flowSection}>
           <div className={styles.flowHeading}>
             <div>
-              <p className={styles.sectionLabel}>From metadata to identifiers</p>
-              <h2>One encoding workflow, two useful forms.</h2>
+              <p className={styles.sectionLabel}>Encoding model</p>
+              <h2>From structured metadata to two identifier formats.</h2>
             </div>
             <p>
-              ClarID-Tools applies explicit codebook mappings and schema checks before
-              generating a readable identifier and its compact stub from the same input.
+              ClarID-Tools validates the codebook and applies its mappings to generate
+              human-readable and compact stub identifiers from the same input record.
             </p>
           </div>
           <figure className={styles.diagramFrame}>
@@ -92,56 +100,63 @@ export default function Home(): React.ReactElement {
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionLabel}>What it does</p>
+          <p className={styles.sectionLabel}>Current scope</p>
           <div className={styles.sectionTitleRow}>
-            <h2>A focused toolkit for the identifier lifecycle.</h2>
-            <p>Use the same command-line interface from first encoding through validation and reuse.</p>
+            <h2>Supported operations</h2>
+            <p>Implemented for subject and biosample entities in the current release.</p>
           </div>
           <div className={styles.cardGrid}>
             <article className={styles.card}>
-              <span>01 / Encode</span>
-              <h2>Generate ClarID identifiers</h2>
-              <p>Create subject and biosample IDs from structured metadata fields.</p>
+              <span>Encode</span>
+              <h2>Generate identifiers</h2>
+              <p>Map structured subject and biosample metadata to human or stub formats.</p>
             </article>
             <article className={styles.card}>
-              <span>02 / Decode</span>
-              <h2>Recover metadata</h2>
-              <p>Decode human-readable or stub IDs back into tabular values.</p>
+              <span>Decode</span>
+              <h2>Recover encoded fields</h2>
+              <p>Decode human-readable or stub identifiers back into structured values.</p>
             </article>
             <article className={styles.card}>
-              <span>03 / Validate</span>
-              <h2>Use schema-backed codebooks</h2>
-              <p>Validate YAML codebooks while keeping project vocabularies explicit.</p>
+              <span>Validate</span>
+              <h2>Check YAML codebooks</h2>
+              <p>Validate codebook structure against the schema before processing data.</p>
             </article>
             <article className={styles.card}>
-              <span>04 / Scale</span>
-              <h2>Run bulk workflows</h2>
-              <p>Use the same CLI for single records, CSV batches, QR codes, and examples.</p>
+              <span>Process</span>
+              <h2>Run table and QR workflows</h2>
+              <p>Process individual records or CSV files and generate or decode QR codes.</p>
             </article>
           </div>
+          <aside className={styles.scopeNote}>
+            <strong>Scope</strong>
+            <p>
+              ClarID complements persistent identifiers and source metadata by carrying
+              selected contextual fields. It is not intended to replace either.
+            </p>
+          </aside>
         </section>
 
         <section className={styles.pathSection}>
           <div>
-            <p className={styles.sectionLabel}>Start here</p>
-            <h2>Choose the documentation you need.</h2>
+            <p className={styles.sectionLabel}>Documentation</p>
+            <h2>Guides, reference, and examples</h2>
             <p className={styles.pathIntro}>
-              Start with a working command, inspect every option, or browse real output.
+              Start with a working command, inspect the CLI options, or browse example output.
             </p>
           </div>
           <div className={styles.pathList}>
             <Link to="/usage/quickstart">
-              <span>01</span>
+              <span>Guide</span>
               <strong>Quickstart</strong>
               <small>Copy-paste commands for encoding and decoding.</small>
             </Link>
             <Link to="/usage/cli-reference">
-              <span>02</span>
+              <span>Reference</span>
               <strong>CLI Reference</strong>
               <small>All commands, arguments, and output modes.</small>
             </Link>
             <Link to="/use-cases/subject">
-              <span>03</span>
+              <span>Examples</span>
               <strong>Use Cases</strong>
               <small>Browsable GDC-derived subject and biosample examples.</small>
             </Link>
