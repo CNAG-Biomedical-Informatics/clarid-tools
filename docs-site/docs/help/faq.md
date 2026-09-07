@@ -70,6 +70,17 @@ If you believe there is a more appropriate code for this context, please feel fr
 ## Usage and Troubleshooting
 
 <details>
+<summary>Can I use an AI coding assistant to prepare input data?</summary>
+
+AI coding assistants can help create the **mapping YAML used by
+`csv2_clarid_in.py`**, which specifies how source columns and values are converted
+into ClarID input fields. Provide the assistant with the
+[preprocessing documentation](../technical-details/pre-processing-script.md)
+and representative input rows. Review the mapping and test the output before
+processing the full dataset.
+
+</details>
+<details>
 <summary>When should I use `human` format versus `stub` format?</summary>
 
 
