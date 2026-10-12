@@ -5,20 +5,21 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './index.module.css';
 
 const identifierSegments = [
-  {value: 'CNAG_Test', label: 'project'},
+  {value: 'TCGA_AML', label: 'project'},
   {value: 'HomSap', label: 'species'},
-  {value: '00042', label: 'subject'},
+  {value: '00001', label: 'subject'},
   {value: 'LIV', label: 'tissue'},
   {value: 'TUM', label: 'sample type'},
   {value: 'RNA', label: 'assay'},
-  {value: 'C15.3', label: 'condition'},
-  {value: 'TRT', label: 'timepoint'},
+  {value: 'I25.110', label: 'condition'},
+  {value: 'CHL', label: 'timepoint'},
   {value: 'P1M', label: 'duration'},
 ] as const;
 
 export default function Home(): React.ReactElement {
   const logo = useBaseUrl('/img/clarid-logo.png');
   const encodingFlow = useBaseUrl('/img/clarid-encoding-flow.svg');
+  const pocketScreenshot = useBaseUrl('/img/clarid-pocket/biosample.png');
 
   return (
     <Layout
@@ -60,7 +61,7 @@ export default function Home(): React.ReactElement {
                 </div>
               </div>
               <code className={styles.identifier}>
-                CNAG_Test-HomSap-00042-LIV-TUM-RNA-C15.3-TRT-P1M
+                TCGA_AML-HomSap-00001-LIV-TUM-RNA-I25.110-CHL-P1M
               </code>
               <div className={styles.segmentGrid}>
                 {identifierSegments.map((segment) => (
@@ -97,6 +98,32 @@ export default function Home(): React.ReactElement {
               to individual records and bulk tables.
             </figcaption>
           </figure>
+        </section>
+
+        <section className={styles.pocketBand} aria-labelledby="clarid-pocket-heading">
+          <Link className={styles.pocketBandVisual} to="/clarid-pocket" aria-label="View ClarID-Pocket">
+            <img
+              src={pocketScreenshot}
+              alt="ClarID-Pocket showing the decoded fields of the illustrative biosample"
+              width="1080"
+              height="2400"
+              loading="lazy"
+            />
+          </Link>
+          <div className={styles.pocketBandCopy}>
+            <p className={styles.sectionLabel}>Android companion</p>
+            <h2 id="clarid-pocket-heading">Scan and decode ClarID labels on your phone</h2>
+            <p>
+              ClarID-Pocket reads subject and biosample QR labels offline using its bundled
+              ClarID 0.04 codebook. The example shown is the same biosample illustrated above.
+            </p>
+            <div className={styles.pocketBandActions}>
+              <Link to="/clarid-pocket">Explore ClarID-Pocket</Link>
+              <a href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest">
+                Download Android APK
+              </a>
+            </div>
+          </div>
         </section>
 
         <section className={styles.section}>

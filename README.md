@@ -52,37 +52,15 @@
 
 ---
 
-<!--description-end-->
+## 📱 Android Companion App
 
-## 🚀 Getting Started
+This repository provides the **ClarID-Tools command-line toolkit**. For scanning ClarID QR labels on a phone, the separate **ClarID-Pocket** Android app decodes subject and biosample identifiers offline.
 
-### 🛠️  Installation
-
-We offer two modes of installation:
-
-1. [Non-Containerized](non-containerized/README.md)
-
-
-2. [Containerized](docker/README.md)
-
-
-### ▶️ Running the CLI
-
-- If you cloned this repository, run commands from the repository root with `bin/clarid-tools`.
-- If you installed ClarID-Tools with CPAN or system-wide, run `clarid-tools`.
-- The packaged default codebook is used automatically, so `--codebook` is only needed when you want to use a custom codebook.
-- The `qrcode` subcommand requires `qrencode` and `zbarimg` on host installs. The Docker image already includes them.
-
-### 📘 Example Usage
-
-1. [Quickstart](https://cnag-biomedical-informatics.github.io/clarid-tools/usage/quickstart/)
-
-2. Use Cases:
- 
-  * [Biosample](https://cnag-biomedical-informatics.github.io/clarid-tools/use-cases/biosample/)
-  * [Subject](https://cnag-biomedical-informatics.github.io/clarid-tools/use-cases/subject/)
+[Learn more about ClarID-Pocket](https://cnag-biomedical-informatics.github.io/clarid-tools/clarid-pocket/) · [Download the latest APK](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest) · [Source code](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket)
 
 ---
+
+<!--description-end-->
 
 ## 🧠 Citation
 

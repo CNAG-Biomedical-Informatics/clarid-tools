@@ -250,7 +250,7 @@
 .flowHeading h2,
 .sectionTitleRow h2 {
   max-width: 720px;
-  margin: 0;
+  margin: 2rem 0 0;
   color: #16323d;
   font-size: clamp(1.8rem, 3.2vw, 2.55rem);
   line-height: 1.1;
@@ -268,7 +268,7 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  margin: 2rem 0 0;
+  margin: 0;
   overflow: hidden;
   border: 1px solid rgba(49, 95, 114, 0.2);
   border-radius: 10px;
@@ -296,6 +296,100 @@
   font-size: 0.83rem;
   line-height: 1.5;
   text-align: center;
+}
+
+.pocketBand {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  align-items: center;
+  width: min(1080px, calc(100% - 3rem));
+  margin: 0 auto 4rem;
+  padding: 1.5rem clamp(1.5rem, 5vw, 3.25rem);
+  overflow: hidden;
+  border: 1px solid rgba(49, 95, 114, 0.18);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(184, 107, 51, 0.14), transparent 15rem),
+    linear-gradient(120deg, #edf5f2, #fbfdfc 76%);
+  box-shadow: 0 16px 38px rgba(22, 50, 61, 0.065);
+}
+
+.pocketBandVisual {
+  display: block;
+  width: 150px;
+  justify-self: center;
+  padding: 0.4rem;
+  border-radius: 23px;
+  background: #16323d;
+  box-shadow: 0 18px 38px rgba(22, 50, 61, 0.22);
+  transition: transform 180ms ease;
+}
+
+.pocketBandVisual:hover {
+  transform: translateY(-3px);
+}
+
+.pocketBandVisual:focus-visible {
+  outline: 3px solid rgba(184, 107, 51, 0.45);
+  outline-offset: 3px;
+}
+
+.pocketBandVisual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+
+.pocketBandCopy h2 {
+  max-width: 680px;
+  margin: 0;
+  color: #16323d;
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.pocketBandCopy > p:not(.sectionLabel) {
+  max-width: 720px;
+  margin: 1rem 0 1.2rem;
+  color: #536c75;
+  line-height: 1.62;
+}
+
+.pocketBandActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.pocketBandActions a {
+  display: inline-flex;
+  min-height: 2.55rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(49, 95, 114, 0.34);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #244b5a;
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.pocketBandActions a:first-child {
+  border-color: #244b5a;
+  background: #244b5a;
+  color: white;
+}
+
+.pocketBandActions a:hover {
+  border-color: #16323d;
+  background: #16323d;
+  color: white;
 }
 
 .section {
@@ -439,6 +533,7 @@
 
 :global([data-theme='dark']) .copy h1,
 :global([data-theme='dark']) .flowHeading h2,
+:global([data-theme='dark']) .pocketBandCopy h2,
 :global([data-theme='dark']) .sectionTitleRow h2,
 :global([data-theme='dark']) .card h2,
 :global([data-theme='dark']) .pathSection h2 {
@@ -451,6 +546,7 @@
 
 :global([data-theme='dark']) .lede,
 :global([data-theme='dark']) .flowHeading > p,
+:global([data-theme='dark']) .pocketBandCopy > p:not(.sectionLabel),
 :global([data-theme='dark']) .sectionTitleRow > p,
 :global([data-theme='dark']) .card p,
 :global([data-theme='dark']) .pathIntro,
@@ -496,6 +592,31 @@
   color: #aebfc4;
 }
 
+:global([data-theme='dark']) .pocketBand {
+  border-color: rgba(196, 219, 224, 0.14);
+  background:
+    radial-gradient(circle at 10% 12%, rgba(184, 107, 51, 0.16), transparent 15rem),
+    linear-gradient(120deg, #152a30, #172a32 76%);
+}
+
+:global([data-theme='dark']) .pocketBandActions a {
+  border-color: rgba(196, 219, 224, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e8f0f1;
+}
+
+:global([data-theme='dark']) .pocketBandActions a:first-child {
+  border-color: #d4e4e7;
+  background: #d4e4e7;
+  color: #16323d;
+}
+
+:global([data-theme='dark']) .pocketBandActions a:hover {
+  border-color: white;
+  background: white;
+  color: #16323d;
+}
+
 :global([data-theme='dark']) .section {
   border-top-color: rgba(196, 219, 224, 0.1);
 }
@@ -537,10 +658,6 @@
     grid-template-columns: 1fr;
   }
 
-  .identityCard {
-    max-width: 620px;
-  }
-
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -560,6 +677,16 @@
   .section {
     padding-right: 1rem;
     padding-left: 1rem;
+  }
+
+  .pocketBand {
+    grid-template-columns: 1fr;
+    width: calc(100% - 2rem);
+    padding: 1.4rem 1.15rem;
+  }
+
+  .pocketBandVisual {
+    width: 140px;
   }
 
   .cardGrid {
@@ -593,6 +720,7 @@
   .primaryAction,
   .secondaryAction,
   .paperAction,
+  .pocketBandVisual,
   .pathList a {
     transition: none;
   }
