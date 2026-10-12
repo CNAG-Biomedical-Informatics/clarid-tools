@@ -1,6 +1,7 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
+  pocketSidebar: [{type: 'doc', id: 'clarid-pocket', label: 'ClarID-Pocket'}],
   docsSidebar: [
     {
       type: 'doc',

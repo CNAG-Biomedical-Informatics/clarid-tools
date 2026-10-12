@@ -354,6 +354,10 @@ This subcommand serves to validate a user's created **codebook**.
 
 ## QR Code Mode
 
+:::tip Scan labels on Android
+[ClarID-Pocket](/clarid-pocket) scans and decodes ClarID subject and biosample QR labels directly on Android. It works offline with its bundled ClarID 0.04 codebook.
+:::
+
 First we will create a directory to write the PNGs (default is `qrcodes/`):
 
 ```bash

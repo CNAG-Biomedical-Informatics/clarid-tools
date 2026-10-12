@@ -1,0 +1,78 @@
+---
+title: ClarID-Pocket
+description: Install ClarID-Pocket for Android and scan ClarID QR labels to read subject and biosample details offline.
+slug: /clarid-pocket
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+ClarID-Pocket is an Android companion to ClarID-Tools. It scans ClarID QR labels and displays decoded subject or biosample fields directly on the device. Scanning and decoding work offline.
+
+<div className="claridPocketActions">
+  <a className="button button--primary" href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest">Download APK</a>
+  <a className="button button--secondary" href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket">Source code</a>
+  <span>Android 8+ · ClarID 0.04 · Offline decoding</span>
+</div>
+
+## Install
+
+1. Open the [latest release](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest) on your phone and download the **`.apk`** file.
+2. Open the APK. If Android asks, allow installation from the browser or file manager you used, then tap **Install**.
+3. Open **ClarID-Pocket**, tap **Scan QR**, and allow camera access.
+
+No Android Studio, computer, USB connection, or account is required.
+
+## Scan and decode
+
+Leave **Entity** and **Format** on **Auto** for routine scanning. Point the camera at a ClarID QR label; the result reports **Detected: Subject** or **Detected: Biosample**, followed by the decoded fields.
+
+If several QR codes are visible, use the centre crosshair to select the intended label. Tap to focus or pinch to zoom.
+
+<div className="claridPocketResult">
+  <figure>
+    <a href={useBaseUrl('/img/clarid-pocket/biosample.png')} aria-label="Open full-size decoded biosample screenshot">
+      <img src={useBaseUrl('/img/clarid-pocket/biosample.png')} alt="ClarID-Pocket showing an automatically detected biosample and its decoded fields" width="1080" height="2400" loading="lazy" />
+    </a>
+    <figcaption>Decoded biosample in Stub format.</figcaption>
+  </figure>
+  <aside>
+    <h3>What the app shows</h3>
+    <p>The result identifies the entity and format, then lists the fields recovered from the label. QR text and decoded values remain on the device.</p>
+    <h3>Try an example</h3>
+    <p>Open this page on another screen and scan this label. It represents a demonstration biosample with subject ID 1 and liver tissue.</p>
+    <img className="claridPocketExample" src={useBaseUrl('/img/clarid-pocket/example-qr.png')} alt="Example ClarID biosample QR code" width="232" height="232" loading="lazy" />
+  </aside>
+</div>
+
+## Settings and updates
+
+The **gear button** opens Settings. Auto supports subject and biosample identifiers in Human and Stub formats. To override detection, choose **Entity** first and then **Format**.
+
+**Advanced** contains the subject widths. These must match the settings used to create the label; the app does not infer them.
+
+**About → Check for updates** checks published releases on GitHub and opens the download page when a newer version is available. Only this optional check needs internet access. Installing a newer APK signed with the same release key preserves your settings.
+
+<div className="claridPocketGallery">
+  <figure>
+    <a href={useBaseUrl('/img/clarid-pocket/home.png')} aria-label="Open full-size main screen screenshot">
+      <img src={useBaseUrl('/img/clarid-pocket/home.png')} alt="ClarID-Pocket main screen with the Scan QR button and settings gear" width="1080" height="2400" loading="lazy" />
+    </a>
+    <figcaption><strong>Main screen</strong><br />Start a scan or open Settings.</figcaption>
+  </figure>
+  <figure>
+    <a href={useBaseUrl('/img/clarid-pocket/settings.png')} aria-label="Open full-size settings screenshot">
+      <img src={useBaseUrl('/img/clarid-pocket/settings.png')} alt="Settings showing Auto entity and format, Advanced settings, app version 0.1.9, and Check for updates" width="1080" height="2400" loading="lazy" />
+    </a>
+    <figcaption><strong>Settings</strong><br />Choose known parameters or check for updates.</figcaption>
+  </figure>
+</div>
+
+<p className="claridPocketCaption">Screenshots from version 0.1.9 on a Samsung Galaxy A51, using the bundled example label. Select an image to view it at full size.</p>
+
+## Compatibility and privacy
+
+:::note Current scope
+ClarID-Pocket supports **ClarID 0.04** with its bundled codebook. Older specification releases, imported codebooks, and encoding are not supported. See the [specification](/technical-details/specification) and [codebook documentation](/technical-details/codebook-and-schema) for the shared format.
+:::
+
+The app stores decoding settings in private Android storage. It keeps no scan history and does not upload scanned identifiers. QR text and decoded results remain in memory.

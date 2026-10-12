@@ -92,6 +92,12 @@ const config: Config = {
           position: 'left',
         },
         {
+          type: 'doc',
+          docId: 'clarid-pocket',
+          label: 'ClarID-Pocket',
+          position: 'left',
+        },
+        {
           href: 'https://colab.research.google.com/drive/1smS42yzL7qYV1kCz34baTWLRr_AAap-r',
           label: 'Colab',
           position: 'left',
