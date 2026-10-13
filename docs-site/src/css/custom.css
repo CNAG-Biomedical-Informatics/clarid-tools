@@ -639,7 +639,17 @@ body {
   }
 }
 
-/* ClarID-Pocket: restrained layouts for the Android companion guide. */
+/* ClarID-Pocket: restrained layouts for the mobile companion guide. */
+.claridPocketTabLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.claridPocketTabLabel svg {
+  flex-shrink: 0;
+}
+
 .claridPocketActions {
   display: flex;
   flex-wrap: wrap;
