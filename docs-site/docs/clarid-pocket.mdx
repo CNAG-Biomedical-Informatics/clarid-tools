@@ -1,20 +1,37 @@
 ---
 title: ClarID-Pocket
-description: Install ClarID-Pocket for Android and scan ClarID QR labels to read subject and biosample details offline.
+description: Scan and decode ClarID QR labels offline. Android APK available; iOS/iPadOS developer proof of concept tested on a physical iPad.
 slug: /clarid-pocket
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-ClarID-Pocket is an Android companion to ClarID-Tools. It scans ClarID QR labels and displays decoded subject or biosample fields directly on the device. Scanning and decoding work offline.
+ClarID-Pocket is a mobile companion to ClarID-Tools. It scans ClarID QR labels and displays decoded subject or biosample fields directly on the device. Both the Android and iOS/iPadOS implementations scan and decode offline.
+
+**iOS/iPadOS is a developer proof of concept**, successfully tested on a physical iPad. There is no public IPA, TestFlight invitation, or App Store download.
+
+Release **v0.2.0 is being prepared and has not been published**. The Android download below points to the latest published release.
 
 <div className="claridPocketActions">
-  <a className="button button--primary" href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest">Download APK</a>
   <a className="button button--secondary" href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket">Source code</a>
-  <span>Android 8+ · ClarID 0.04 · Offline decoding</span>
+  <span>ClarID 0.04 · Offline decoding</span>
 </div>
 
-## Install
+<Tabs defaultValue="android" groupId="clarid-pocket-platform">
+<TabItem value="android" label={<span className="claridPocketTabLabel"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+      <path d="M4 16a8 8 0 0 1 16 0v3H4z" fill="currentColor" />
+      <path d="m7 9-2-4m12 4 2-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <circle cx="8.5" cy="14" r="1" fill="var(--ifm-background-color)" />
+      <circle cx="15.5" cy="14" r="1" fill="var(--ifm-background-color)" />
+    </svg><span>Android 8+</span></span>}>
+
+## Install on Android
+
+An installable APK is available through GitHub Releases.
+
+<a className="button button--primary" href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest">Download Android APK</a>
 
 1. Open the [latest release](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest) on your phone and download the **`.apk`** file.
 2. Open the APK. If Android asks, allow installation from the browser or file manager you used, then tap **Install**.
@@ -23,6 +40,8 @@ ClarID-Pocket is an Android companion to ClarID-Tools. It scans ClarID QR labels
 No Android Studio, computer, USB connection, or account is required.
 
 ## Scan and decode
+
+The controls and screenshots below describe the Android app.
 
 Leave **Entity** and **Format** on **Auto** for routine scanning. Point the camera at a ClarID QR label; the result reports **Detected: Subject** or **Detected: Biosample**, followed by the decoded fields.
 
@@ -69,10 +88,29 @@ The **gear button** opens Settings. Auto supports subject and biosample identifi
 
 <p className="claridPocketCaption">Screenshots from version 0.1.9 on a Samsung Galaxy A51, using the bundled example label. Select an image to view it at full size.</p>
 
-## Compatibility and privacy
+### Privacy
+
+On Android, the app stores decoding settings in private storage. It keeps no scan history and does not upload scanned identifiers. QR text and decoded results remain in memory.
+
+</TabItem>
+<TabItem value="ios" label={<span className="claridPocketTabLabel"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+      <rect x="6" y="2" width="12" height="20" rx="3" />
+      <path d="M10 5h4m-4 14h4" />
+    </svg><span>iOS/iPadOS 15+</span></span>}>
+
+:::note Developer proof of concept
+The native SwiftUI app has been successfully tested on a **physical iPad**, including scanning, focus, zoom, settings, and update checks. There is no public IPA, TestFlight invitation, or App Store download.
+:::
+
+Installation requires a **Mac, Xcode, and your own Apple signing account**. The device may require you to trust the developer certificate. Free Personal Team signing expires after **seven days**, requiring rebuilding and reinstalling the app.
+
+Follow the repository's [iOS developer instructions](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/blob/main/ios/README.md) to build and install it. Scanning and decoding work offline; update checks require internet access.
+
+</TabItem>
+</Tabs>
+
+## Compatibility
 
 :::note Current scope
 ClarID-Pocket supports **ClarID 0.04** with its bundled codebook. Older specification releases, imported codebooks, and encoding are not supported. See the [specification](/technical-details/specification) and [codebook documentation](/technical-details/codebook-and-schema) for the shared format.
 :::
-
-The app stores decoding settings in private Android storage. It keeps no scan history and does not upload scanned identifiers. QR text and decoded results remain in memory.
