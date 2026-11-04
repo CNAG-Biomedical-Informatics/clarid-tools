@@ -1,12 +1,14 @@
+"""Tests for CSV/TSV preprocessing and mapping operations."""
 import unittest
 import tempfile
 import os
 import sys
 import csv
-from csv2_clarid_in import (
+from csv2_clarid_in import main
+from clarid_preprocessing.transforms import (
     strip_quotes, trim, collapse_spaces, remove_all_spaces,
     remove_suffix, map_values, normalize_sex, bucketize_age,
-    apply_ops, main, normalize_multivalue
+    apply_ops, normalize_multivalue
 )
 
 class TestPrimitives(unittest.TestCase):

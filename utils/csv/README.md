@@ -4,6 +4,10 @@
 
 `csv2_clarid_in.py` is a script to convert raw TSV or CSV files into a standard CSV format for `biosample` or `subject` entities. It uses a YAML file to define how each field is handled, with support for field transformations and automatic subject ID generation.
 
+For Beacon v2/BFF individuals or biosamples in JSON, use the
+[BFF preprocessing guide](../bff/README.md). Both utilities prepare CSV input for
+the ClarID encoder.
+
 🧬 *Included in the containerized version of ClarID-Tools — no installation needed if using the Docker image.*
 
 __Note:__ These helper scripts are intended to work with the ClarID-Tools release they are shipped with.
@@ -234,6 +238,16 @@ fields:
 - `join_with`: `";"`
 - `drop_empty`: `true`
 - `dedupe`: `false`
+
+---
+
+## Tests
+
+Run from the repository root:
+
+```bash
+python3 -m unittest discover -s utils/csv -p 'test_*.py'
+```
 
 ---
 

@@ -38,6 +38,7 @@ RUN python3 -m venv /opt/clarid-venv \
 # Exercise the exact source tree that will remain in the runtime image.
 RUN prove -l t \
     && python3 -m unittest discover -s utils/csv -p 'test_*.py' \
+    && python3 -m unittest discover -s utils/bff -p 'test_*.py' \
     && if [ "$BUILD_VERSION" != "development" ]; then \
          test "$(perl bin/clarid-tools --version)" = "clarid-tools version $BUILD_VERSION"; \
        fi

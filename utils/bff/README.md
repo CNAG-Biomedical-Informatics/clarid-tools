@@ -1,62 +1,164 @@
-# BFF → ClarID
+# BFF preprocessing
 
-Extract supported fields from Beacon v2/BFF **individuals or biosamples** into
-ClarID-ready CSV, then use the existing encoder. No DuckDB or COHORTome is needed.
-The original JSON remains the full source record.
+`bff2_clarid_in.py` prepares Beacon v2/BFF **individuals or biosamples** for
+ClarID-Tools. A YAML mapping selects fields from your JSON and converts their
+values into the vocabulary expected by your codebook. The script writes CSV;
+`clarid-tools code` then generates the identifiers. Your source JSON is unchanged.
 
-## Quick start
+For tabular input, use the [CSV/TSV preprocessing guide](../csv/README.md).
 
-Run from the ClarID repository with its Perl dependencies installed. The small,
-fictional fixture is ready to try; use new output filenames for each run.
+## Choose your input
+
+| Input records | Converter option | Example mapping | Source IDs retained in CSV |
+| --- | --- | --- | --- |
+| Individuals | `--entity subject` | `utils/bff/subject_mapping.yaml` | `id` becomes `unique_id` |
+| Biosamples | `--entity biosample` | `utils/bff/biosample_mapping.yaml` | `id` becomes `unique_id`; `individualId` becomes `individual_id` |
+
+Input must be a **JSON array of records**, optionally gzip-compressed (`.json.gz`).
+If you have a full Beacon API response, extract the individuals or biosamples
+array first. The converter reads that array into memory.
+
+To prepare both entities, start with individuals and reuse their subject numbers
+when processing biosamples, as shown below.
+
+## Try the included example
+
+Run these commands from the ClarID-Tools repository root, with its normal Perl
+dependencies installed. The utilities are supplied with the GitHub checkout and
+Docker image; they are not included in the CPAN package.
+
+The example uses three fictional individuals and five biosamples under
+`utils/bff/fixtures/`. Install the Python dependencies if needed (already present
+in the Docker image):
 
 ```bash
 python3 -m pip install -r utils/csv/requirements.txt
+```
+
+### 1. Prepare the individuals
+
+The supplied subject-number map assigns `EX-A`, `EX-B`, and `EX-C` the numbers
+41, 42, and 43. Those numbers will also identify their biosamples.
+
+```bash
 python3 utils/bff/bff2_clarid_in.py --entity subject \
   -i utils/bff/fixtures/individuals.json -m utils/bff/subject_mapping.yaml \
   -o subjects_in.csv --subject-map utils/bff/fixtures/subject_numbers.csv
+```
 
+### 2. Prepare their biosamples
+
+Pass the subject CSV from step 1 as `--subject-map` to keep the same numbering:
+
+```bash
 python3 utils/bff/bff2_clarid_in.py --entity biosample \
   -i utils/bff/fixtures/biosamples.json -m utils/bff/biosample_mapping.yaml \
   -o biosamples_in.csv --subject-map subjects_in.csv
+```
 
+These two CSV files are encoder input, not the final identifiers. Use new output
+filenames when repeating a conversion: the preprocessing script refuses to
+overwrite an existing file.
+
+### 3. Generate ClarID identifiers
+
+```bash
 bin/clarid-tools code --entity subject --action encode --format human \
   --codebook share/versions/0.04/clarid-codebook.yaml \
   --infile subjects_in.csv --sep ',' --outfile subjects_human.csv
+
+bin/clarid-tools code --entity biosample --action encode --format human \
+  --codebook share/versions/0.04/clarid-codebook.yaml \
+  --infile biosamples_in.csv --sep ',' --outfile biosamples_human.csv
 ```
 
-For biosample encoding, use `--entity biosample` and `biosamples_in.csv`.
-Use `--format stub` for compact labels; decode with `--with-condition-name`
-for condition descriptions. The current checkout includes fixes for blank
-batch/replicate CSV cells and missing-species stub decoding.
+The resulting CSV files retain the source columns and add `clar_id`. For example,
+individual `EX-A` becomes:
 
-## Mapping
+```text
+CNAG_Test-00041-Case-C22.0-Male-A40_49
+```
 
-Copy the relevant mapping YAML and review it for your study. Project/study names
-must exist in the codebook; retain any study-specific codebook with the output.
+For compact identifiers, use `--format stub` and a new output filename; the added
+column is then `stub_id`. Expected human and stub labels for every example record
+are supplied in `utils/bff/fixtures/expected_subject.csv` and
+`utils/bff/fixtures/expected_biosample.csv`.
 
-- Individual `id` becomes `unique_id`. Biosamples preserve their `id` as
-  `unique_id` and their parent `individualId` as `individual_id`.
-- `fields` selects dotted paths, such as `sampleOriginType.id`, and reuses the
-  transformations from [`utils/csv`](../csv/README.md). Nothing is encoded here.
-- JSON-valued strings are parsed only when a configured path enters them.
-  Nested arrays need an explicit index, for example `info.details.0.label`.
-  No first-element choice or clinical inference happens automatically.
-- `static_fields` supplies explicit fallbacks for missing values. Unrecognized
-  ontology codes are not silently converted to Unknown; the encoder validates
-  mapped vocabulary against its codebook.
-- The examples intentionally have **no default condition**. Review this mapping
-  for the study. A reference sample does not automatically mean normal tissue,
-  and a collection date alone does not establish elapsed time from baseline.
-- Batch and replicate can be omitted. Do not invent them to make labels unique.
+**Different specimens may share a ClarID.** The example biosamples `EX-S1` and
+`EX-S2` intentionally produce the same label because their encoded characteristics
+match. Their original IDs remain distinct in `unique_id`. ClarID is an informative
+label, not a replacement for the specimen's database identity.
 
-Only selected fields enter CSV. Input/output may be gzip-compressed. Existing
-converter output files are never overwritten (the separate encoder may overwrite
-its output). Input must be a JSON array, not an arbitrary Beacon API response.
-The array is read into memory. This is not a whole-genome variation converter.
+The separate encoder may overwrite its output files. Use this checkout when
+trying the example: it includes the fixes for blank batch/replicate CSV cells
+and missing-species stub decoding.
+
+## Adapt the mapping to your data
+
+Start with a copy of `subject_mapping.yaml` or `biosample_mapping.yaml` and edit
+it for your study. The **mapping YAML** tells the converter where to read values;
+the **codebook YAML** defines the vocabulary and codes used by the encoder.
+
+For example, this excerpt from a biosample mapping reads an ontology code and
+maps it to a tissue name in the codebook:
+
+```yaml
+fields:
+  tissue:
+    source: sampleOriginType.id
+    operations:
+      - map_values:
+          'UBERON:0000178': Blood
+          'UBERON:0002107': Liver
+static_fields:
+  tissue: Not Available
+```
+
+Here, `sampleOriginType.id` selects a nested JSON value, `map_values` translates
+it, and `static_fields` supplies a fallback if the mapped value is missing or
+blank. An unrecognized code is passed through for the encoder to validate; it is
+not automatically replaced with `Not Available`.
+
+Before converting your own records:
+
+1. Set the `study` or `project` to a name in your codebook.
+2. Check every `source` path against your JSON. The `info.*` paths in the examples
+   are study-specific metadata, not required Beacon fields.
+3. Review vocabulary mappings and fallbacks. The examples intentionally have
+   **no default condition**: supply source ICD-10 codes or a documented study
+   convention. No general ontology-to-ICD mapping is inferred.
+4. Run a small subset and inspect the prepared CSV before encoding the full set.
+
+The converter reuses the [CSV mapping transformations](../csv/README.md).
+Nested arrays require an explicit index, such as `diseases.0.diseaseCode.id`;
+that path selects only the first disease. Choose the index deliberately.
+JSON-valued strings are parsed when a configured path traverses them, for example
+`info.clarid.condition`.
+
+Batch and replicate may be omitted. Do not invent them to make labels unique.
+Likewise, a reference sample does not automatically imply normal tissue, and a
+collection date alone does not establish elapsed time from baseline. Use `P0N`
+for missing duration; `P0D` represents an actual zero duration.
+
+## Keep subject numbers consistent
+
+`--subject-map` accepts a subject CSV with `unique_id,subject_id`, or a previous
+output with `individual_id,subject_id`. Existing assignments are preserved; new
+subjects receive numbers above the previous maximum. Without a map, numbers
+are assigned by sorted subject ID, independent of input row order.
+
+Keep the **complete subject map** when preparing subsets or later versions.
+Generating a fresh map for a different subset can assign different numbers.
+An output containing only a subset is not a replacement for the complete map.
+
+To reproduce existing ClarIDs, retain the subject map, codebook, field mapping,
+and any baseline convention used. Matching source IDs alone is not enough.
 
 ## Clinical snapshots and age
 
-For one record per visit, use `--entity subject --individual-id-path patient_id`.
+If your input contains one record per visit, use
+`--entity subject --individual-id-path patient_id` to group visits by subject.
+Each source record still needs an `id`.
 Identical mapped subject rows collapse into one; conflicting values fail.
 To select a baseline explicitly, add `--first-by info.event_date`. The earliest
 recorded calendar date wins, missing dates sort last, and conflicting ties fail.
@@ -65,36 +167,36 @@ No visit is silently selected by input order.
 For a birth date, an `age_at` operation can precede the existing `bucketize_age`:
 
 ```yaml
-age_group:
-  source: info.phenopacket.dateOfBirth
-  operations:
-    - age_at: info.event_date
-    - bucketize_age:
-        - {min: 40, max: 49, name: Age40to49}
-        # Include the other age bands used by your study.
+fields:
+  age_group:
+    source: info.phenopacket.dateOfBirth
+    operations:
+      - age_at: info.event_date
+      - bucketize_age:
+          - {min: 40, max: 49, name: Age40to49}
+          # Include the other age bands used by your study.
 ```
 
 Dates use the recorded ISO calendar-date component, never today's date. Missing
 dates use the configured fallback. The paths above are examples of source `info`
-metadata, not required Beacon fields. No general ontology-to-ICD mapping is inferred.
+metadata, not required Beacon fields.
 
-## Subject numbers and identity
+## Common errors
 
-`--subject-map` accepts a subject CSV with `unique_id,subject_id`, or a previous
-output with `individual_id,subject_id`. Existing numbers are preserved; new
-subjects receive numbers above the previous maximum. Without a map, numbers
-are assigned by sorted subject ID, independent of biosample row order.
+| Message or symptom | What to check |
+| --- | --- |
+| Missing required field, such as `condition` | Check its source path and provide a mapping or an explicit fallback. |
+| Unknown vocabulary value during encoding | Check that the mapped name exists in the selected codebook. |
+| Conflicting subject metadata | Review multiple records for the subject; select a baseline explicitly if appropriate. |
+| Conflicting numeric subject assignments | Reuse the complete subject map and resolve conflicting assignments before combining outputs. |
+| Converter refuses to write the output | Choose a new filename and check that its parent directory exists and is writable. |
 
-Keep the complete subject map when preparing subsets or later versions.
-Generating a fresh mapping for a different subset can assign different numbers;
-a subset output is not a replacement for the complete mapping.
+Use `.csv.gz` as the output extension to write gzip-compressed CSV.
+For all command-line options, run:
 
-**Different specimens may share a ClarID.** It describes their encoded
-characteristics, not their unique database identity. The source biosample ID
-is preserved, and repeated subjects share the same numeric subject ID.
-
-To reproduce existing ClarIDs, reuse their subject map, codebook, field mappings
-and baseline convention. Matching source IDs alone is not enough.
+```bash
+python3 utils/bff/bff2_clarid_in.py --help
+```
 
 ## Tests
 
@@ -102,5 +204,5 @@ and baseline convention. Matching source IDs alone is not enough.
 python3 -m unittest discover -s utils/bff -p 'test_*.py'
 ```
 
-The utility uses Python and PyYAML, like `utils/csv`. It does not modify BFF,
-call a language model, download data or require COHORTome.
+The utility uses Python and PyYAML, like `utils/csv`, and processes local files
+without modifying the source JSON.

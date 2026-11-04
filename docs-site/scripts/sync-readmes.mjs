@@ -19,10 +19,18 @@ const pages = [
     source: path.join(repoRoot, 'utils', 'csv', 'README.md'),
     target: path.join(docsSiteRoot, 'docs', 'technical-details', 'pre-processing-script.md'),
     transform: (markdown) =>
-      markdown.replace(
-        '## ⏱️ Duration binning (days → ISO8601 PnU)',
-        '## Duration binning days to ISO8601 PnU',
-      ),
+      markdown
+        .replace(
+          '## ⏱️ Duration binning (days → ISO8601 PnU)',
+          '## Duration binning days to ISO8601 PnU',
+        )
+        .replaceAll('](../bff/README.md)', '](./bff-preprocessing.md)'),
+  },
+  {
+    source: path.join(repoRoot, 'utils', 'bff', 'README.md'),
+    target: path.join(docsSiteRoot, 'docs', 'technical-details', 'bff-preprocessing.md'),
+    transform: (markdown) =>
+      markdown.replaceAll('](../csv/README.md)', '](./pre-processing-script.md)'),
   },
 ];
 

@@ -14,9 +14,9 @@ import sys
 
 import yaml
 
-# Reuse transformations, not the CSV utility's row-order subject numbering.
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'csv'))
-from csv2_clarid_in import apply_ops
+# Resolve the shared package relative to this script, not the working directory.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from clarid_preprocessing.transforms import apply_ops
 
 FIELDS = {
     'biosample': ['project', 'species', 'tissue', 'sample_type', 'assay',
