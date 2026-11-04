@@ -1,82 +1,183 @@
-name: Docker build (multi-arch)
+name: Docker build (native multi-arch)
 
 on:
-  push:
-    tags:
-      - "*"
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing annotated release tag to build, for example 0.04"
+        description: Existing annotated release tag to build (e.g. 0.05)
         required: true
         type: string
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
-
-concurrency:
-  group: docker-${{ inputs.tag || github.ref }}
-  cancel-in-progress: false
+      publish:
+        description: Publish images to Docker Hub
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
+concurrency:
+  group: docker-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: ${{ inputs.tag }}
+  IMAGE: manuelrueda/clarid-tools
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  release:
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+      revision: ${{ steps.metadata.outputs.revision }}
     steps:
-      - name: Check out release
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ env.RELEASE_TAG }}
           fetch-depth: 0
 
-      - name: Verify release metadata
-        id: release_metadata
-        shell: bash
-        run: bash .github/scripts/verify-release.sh "$RELEASE_TAG"
-
-      - name: Allow slower CPAN configuration under emulation
-        shell: bash
+      - name: Validate and resolve release once for both architectures
+        id: metadata
+        env:
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
         run: |
-          if ! grep -q -- "--configure-timeout" docker/Dockerfile; then
-            sed -i "s/cpanm --notest/cpanm --configure-timeout 300 --notest/" docker/Dockerfile
-          fi
+          bash .github/scripts/verify-release.sh "$RELEASE_TAG"
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+  build:
+    needs: release
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    name: Build and test linux/${{ matrix.arch }} natively
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
         with:
-          platforms: arm64,amd64
+          ref: ${{ needs.release.outputs.revision }}
+
+      - name: Verify native Docker architecture
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          native="$(docker info --format '{{.Architecture}}')"
+          case "$ARCH:$native" in
+            amd64:x86_64|amd64:amd64|arm64:aarch64|arm64:arm64) ;;
+            *) echo "Expected native $ARCH, found $native" >&2; exit 1 ;;
+          esac
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v3
+        if: inputs.publish
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push multi-arch image
-        uses: docker/build-push-action@v6
+      - name: Build image from the selected release
+        id: image
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: docker/Dockerfile
-          push: true
-          tags: |
-            manuelrueda/clarid-tools:${{ steps.release_metadata.outputs.version }}
-            manuelrueda/clarid-tools:latest
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/${{ matrix.arch }}
+          tags: ${{ env.IMAGE }}
+          load: ${{ !inputs.publish }}
+          outputs: ${{ (inputs.publish) && 'type=image,push-by-digest=true,name-canonical=true,push=true' || '' }}
           build-args: |
-            BUILD_VERSION=${{ steps.release_metadata.outputs.version }}
-            VCS_REF=${{ steps.release_metadata.outputs.revision }}
-          labels: |
-            org.opencontainers.image.title=ClarID-Tools
-            org.opencontainers.image.description=Toolkit for generating and validating ClarID identifiers
-            org.opencontainers.image.source=https://github.com/CNAG-Biomedical-Informatics/clarid-tools
-            org.opencontainers.image.version=${{ steps.release_metadata.outputs.version }}
-            org.opencontainers.image.revision=${{ steps.release_metadata.outputs.revision }}
-            org.opencontainers.image.licenses=Artistic-2.0
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+            BUILD_VERSION=${{ needs.release.outputs.version }}
+            VCS_REF=${{ needs.release.outputs.revision }}
+          cache-from: type=gha,scope=clarid-tools-native-${{ matrix.arch }}
+          cache-to: type=gha,scope=clarid-tools-native-${{ matrix.arch }},mode=max
+
+      - name: Test the actual image on its native runner
+        timeout-minutes: 15
+        env:
+          PUBLISH: ${{ inputs.publish }}
+          DIGEST: ${{ steps.image.outputs.digest }}
+          ARCH: ${{ matrix.arch }}
+          REVISION: ${{ needs.release.outputs.revision }}
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          image="$IMAGE:latest"
+          if [ "$PUBLISH" = true ]; then
+            image="$IMAGE@$DIGEST"
+            docker pull --platform "linux/$ARCH" "$image"
+          fi
+          test "$(docker image inspect --format '{{.Architecture}}' "$image")" = "$ARCH"
+          test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$image")" = "$REVISION"
+          test "$(docker run --rm --network none "$image" clarid-tools --version)" = "clarid-tools version $VERSION"
+          docker run --rm --network none "$image" prove -l t
+          docker run --rm --network none "$image" python3 -m unittest discover -s utils/csv -p 'test_*.py'
+          docker run --rm --network none "$image" python3 -m unittest discover -s utils/bff -p 'test_*.py'
+
+      - name: Record tested image digest
+        if: inputs.publish
+        env:
+          DIGEST: ${{ steps.image.outputs.digest }}
+        run: |
+          [[ "$DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]]
+          mkdir -p "$RUNNER_TEMP/digests"
+          printf '%s\n' "$DIGEST" > "$RUNNER_TEMP/digests/${{ matrix.arch }}.txt"
+
+      - uses: actions/upload-artifact@v4
+        if: inputs.publish
+        with:
+          name: docker-native-digest-${{ matrix.arch }}
+          path: ${{ runner.temp }}/digests/*.txt
+          if-no-files-found: error
+          retention-days: 3
+
+  publish:
+    if: inputs.publish
+    needs: [release, build]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.release.outputs.revision }}
+
+      - name: Refuse publication if the release tag moved during the build
+        env:
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+          REVISION: ${{ needs.release.outputs.revision }}
+        run: |
+          git fetch --force origin "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
+          test "$(git cat-file -t "refs/tags/$RELEASE_TAG")" = tag
+          test "$(git rev-parse "refs/tags/${RELEASE_TAG}^{commit}")" = "$REVISION"
+
+      - uses: docker/setup-buildx-action@v4
+
+      - uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: docker-native-digest-*
+          path: digests
+          merge-multiple: true
+
+      - name: Publish one multi-platform image under the existing tags
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          sources=()
+          for arch in amd64 arm64; do
+            digest="$(cat "digests/$arch.txt")"
+            [[ "$digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+            sources+=("$IMAGE@$digest")
+          done
+          docker buildx imagetools create --dry-run "${sources[@]}" > manifest.json
+          jq -e '[.manifests[].platform | select(.os == "linux") | .architecture] | sort == ["amd64", "arm64"]' manifest.json
+          docker buildx imagetools create \
+            --tag "$IMAGE:$VERSION" --tag "$IMAGE:latest" "${sources[@]}"
+          docker buildx imagetools inspect "$IMAGE:$VERSION"
