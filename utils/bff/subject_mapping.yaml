@@ -1,0 +1,36 @@
+# Example only. Review disease, case/control and age mappings for your study.
+fields:
+  type:
+    source: info.study_group
+    operations:
+      - map_values: {case: Case, control: Control}
+  condition:
+    source: diseases.0.diseaseCode.id
+    operations:
+      - map_values:
+          'ICD10:C22.0': C22.0
+          'ICD10:M06.9': M06.9
+          'ICD10:Z00.0': Z00.0
+  sex:
+    source: sex.label
+    operations: [normalize_sex]
+  age_group:
+    source: info.age_at_enrolment
+    operations:
+      - bucketize_age:
+          - {min: 0, max: 9, name: Age0to9}
+          - {min: 10, max: 19, name: Age10to19}
+          - {min: 20, max: 29, name: Age20to29}
+          - {min: 30, max: 39, name: Age30to39}
+          - {min: 40, max: 49, name: Age40to49}
+          - {min: 50, max: 59, name: Age50to59}
+          - {min: 60, max: 69, name: Age60to69}
+          - {min: 70, max: 79, name: Age70to79}
+          - {min: 80, max: 89, name: Age80to89}
+          - {min: 90, max: 99, name: Age90to99}
+static_fields:
+  study: CNAG-Test
+  type: Not Available
+  condition: null  # No diagnosis or control status is inferred from missing data.
+  sex: Not Available
+  age_group: Not Available

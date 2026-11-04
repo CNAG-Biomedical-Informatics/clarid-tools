@@ -1,0 +1,40 @@
+# Copy and edit for your dataset. This is not a universal clinical mapping.
+fields:
+  species:
+    source: info.taxId
+    operations:
+      - map_values:
+          '9606': Human
+          'NCBITaxon:9606': Human
+  tissue:
+    source: sampleOriginType.id
+    operations:
+      - map_values:
+          'UBERON:0000178': Blood
+          'UBERON:0002107': Liver
+          'UBERON:0000955': Brain
+          'UBERON:0002097': Skin
+  condition:
+    source: info.clarid.condition
+  sample_type:
+    source: info.clarid.sample_type
+  assay:
+    source: info.clarid.assay
+  timepoint:
+    source: info.clarid.timepoint
+  duration:
+    source: info.clarid.duration
+  batch:
+    source: info.clarid.batch
+  replicate:
+    source: info.clarid.replicate
+
+static_fields:
+  project: CNAG-Test  # Example in the reference codebook; replace for your study.
+  species: Not Available
+  tissue: Not Available
+  sample_type: Not Available
+  assay: Not Available
+  condition: null  # REQUIRED: map source ICD-10 codes or choose a documented study convention.
+  timepoint: Not Available
+  duration: P0N  # Missing duration in codebook 0.04; P0D means an actual zero duration.

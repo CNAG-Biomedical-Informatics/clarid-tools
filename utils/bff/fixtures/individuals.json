@@ -1,0 +1,19 @@
+[
+  {
+    "id": "EX-A",
+    "sex": {"id": "NCIT:C20197", "label": "Male"},
+    "diseases": [{"diseaseCode": {"id": "ICD10:C22.0", "label": "Liver cell carcinoma"}}],
+    "info": {"study_group": "case", "age_at_enrolment": 45}
+  },
+  {
+    "id": "EX-B",
+    "sex": {"id": "NCIT:C16576", "label": "Female"},
+    "diseases": [{"diseaseCode": {"id": "ICD10:M06.9", "label": "Rheumatoid arthritis, unspecified"}}],
+    "info": {"study_group": "case", "age_at_enrolment": 34}
+  },
+  {
+    "id": "EX-C",
+    "diseases": [{"diseaseCode": {"id": "ICD10:Z00.0", "label": "General medical examination"}}],
+    "info": {"study_group": "control"}
+  }
+]

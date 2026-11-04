@@ -1,0 +1,26 @@
+[
+  {
+    "id": "EX-S1", "individualId": "EX-A",
+    "sampleOriginType": {"id": "UBERON:0000178", "label": "Blood"},
+    "info": {"taxId": 9606, "clarid": {"condition": "C22.0", "sample_type": "Normal", "assay": "WGS", "timepoint": "Baseline", "duration": "P0D"}}
+  },
+  {
+    "id": "EX-S2", "individualId": "EX-A",
+    "sampleOriginType": {"id": "UBERON:0000178", "label": "Blood"},
+    "info": {"taxId": 9606, "clarid": {"condition": "C22.0", "sample_type": "Normal", "assay": "WGS", "timepoint": "Baseline", "duration": "P0D"}}
+  },
+  {
+    "id": "EX-S3", "individualId": "EX-B",
+    "sampleOriginType": {"id": "UBERON:0002107", "label": "Liver"},
+    "info": {"taxId": 9606, "clarid": "{\"condition\":\"M06.9\",\"sample_type\":\"Normal\",\"assay\":\"RNA_seq\",\"timepoint\":\"Collection\",\"duration\":\"P0N\",\"batch\":2}"}
+  },
+  {
+    "id": "EX-S4", "individualId": "EX-B",
+    "sampleOriginType": {"id": "UBERON:0002097", "label": "Skin"},
+    "info": {"taxId": 9606, "clarid": {"condition": "M06.9", "replicate": 3}}
+  },
+  {
+    "id": "EX-S5", "individualId": "EX-C",
+    "info": {"clarid": {"condition": "Z00.0"}}
+  }
+]

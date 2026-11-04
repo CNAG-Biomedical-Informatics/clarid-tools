@@ -50,6 +50,9 @@
 - ✅ **Schema validation** using JSON Schema and YAML codebooks
 - 📦 Command-line interface 
 
+Prepare metadata with the [CSV/TSV](utils/csv/README.md) or
+[Beacon v2/BFF](utils/bff/README.md) conversion utilities.
+
 ---
 
 ## 📱 Android Companion App
