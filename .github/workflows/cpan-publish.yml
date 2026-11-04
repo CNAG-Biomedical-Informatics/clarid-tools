@@ -1,22 +1,19 @@
 name: Publish to CPAN
 
 on:
-  push:
-    tags:
-      - "*"
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing annotated release tag to publish, for example 0.04"
+        description: "Existing annotated release tag to publish after Docker passes, for example 0.05"
         required: true
         type: string
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+  RELEASE_TAG: ${{ inputs.tag }}
 
 concurrency:
-  group: cpan-${{ inputs.tag || github.ref }}
+  group: cpan-${{ inputs.tag }}
   cancel-in-progress: false
 
 permissions:
