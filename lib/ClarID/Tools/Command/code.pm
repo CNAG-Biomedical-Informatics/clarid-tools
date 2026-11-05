@@ -906,7 +906,10 @@ sub _decode_stub_biosample {
     my $spec_stub = substr( $head, 0, $spec_w );
     my %sp_by = map { $cb->{species}{$_}{stub_code} => $_ }
       keys %{ $cb->{species} };
-    # The global Not Available token is exempt from the species-width rule.
+    # Defensively accept the global Not Available token if used in a label.
+    # Selecting Not Available for species inherits the codebook's global stub n.
+    # This is not a specification width exception: project mappings should use
+    # Unknown (00 in the reference codebook) to preserve the species stub width.
     my $nav = $cb->{species}{'Not Available'}{stub_code};
     if ( !exists $sp_by{$spec_stub} && defined $nav && length $nav
         && substr( $head, 0, length $nav ) eq $nav ) {

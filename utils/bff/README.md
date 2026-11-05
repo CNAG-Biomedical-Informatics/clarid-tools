@@ -119,6 +119,10 @@ it, and `static_fields` supplies a fallback if the mapped value is missing or
 blank. An unrecognized code is passed through for the encoder to validate; it is
 not automatically replaced with `Not Available`.
 
+The example maps missing species to `Unknown`, whose reference stub is `00`,
+to preserve the two-character species width rather than inherit the global
+`Not Available` stub `n`.
+
 Before converting your own records:
 
 1. Set the `study` or `project` to a name in your codebook.

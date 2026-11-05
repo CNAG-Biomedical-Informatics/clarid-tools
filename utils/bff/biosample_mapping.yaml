@@ -31,7 +31,7 @@ fields:
 
 static_fields:
   project: CNAG-Test  # Example in the reference codebook; replace for your study.
-  species: Not Available
+  species: Unknown  # Uses the reference codebook's two-character species stub 00.
   tissue: Not Available
   sample_type: Not Available
   assay: Not Available
