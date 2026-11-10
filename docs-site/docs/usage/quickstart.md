@@ -354,6 +354,11 @@ This subcommand serves to validate a user's created **codebook**.
 
 ## QR Code Mode
 
+Use `qrcode --action encode` to generate QR-code PNGs from a table of existing
+ClarID identifiers. `qrcode --action decode` reads the identifier text back from
+the images; use `code --action decode` to recover its metadata fields.
+ClarID-Pocket combines scanning and metadata decoding on the device.
+
 :::tip Scan labels on Android
 [ClarID-Pocket](/clarid-pocket) scans and decodes ClarID subject and biosample QR labels directly on Android. It works offline with its bundled ClarID 0.04 codebook.
 :::

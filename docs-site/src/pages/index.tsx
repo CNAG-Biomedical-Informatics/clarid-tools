@@ -20,6 +20,7 @@ export default function Home(): React.ReactElement {
   const logo = useBaseUrl('/img/clarid-logo.png');
   const encodingFlow = useBaseUrl('/img/clarid-encoding-flow.svg');
   const pocketScreenshot = useBaseUrl('/img/clarid-pocket/biosample.png');
+  const exampleQr = useBaseUrl('/img/clarid-pocket/example-qr.png');
 
   return (
     <Layout
@@ -35,8 +36,7 @@ export default function Home(): React.ReactElement {
                 Human-readable and compact identifiers for biomedical metadata
               </p>
               <p className={styles.lede}>
-                A command-line implementation for encoding and decoding subject and
-                biosample identifiers using versioned YAML codebooks and schema validation.
+                Encode and decode subject and biosample identifiers using YAML codebooks.
               </p>
               <div className={styles.actions}>
                 <Link className={styles.primaryAction} to="/usage/quickstart">
@@ -94,8 +94,7 @@ export default function Home(): React.ReactElement {
               />
             </div>
             <figcaption>
-              The codebook keeps project vocabulary explicit; the CLI applies it consistently
-              to individual records and bulk tables.
+              Use your project's codebook to encode individual records or CSV tables.
             </figcaption>
           </figure>
         </section>
@@ -118,25 +117,30 @@ export default function Home(): React.ReactElement {
               ClarID 0.04 codebook. The example shown is the same biosample illustrated above.
             </p>
             <div className={styles.pocketBandActions}>
+              <Link to="/usage/quickstart#qr-code-mode">Create labels with ClarID-Tools</Link>
               <Link to="/clarid-pocket">Explore ClarID-Pocket</Link>
               <a href="https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest">
                 Download Android APK
               </a>
             </div>
           </div>
+          <figure className={styles.pocketQr}>
+            <a href={exampleQr} aria-label="Open full-size example ClarID QR code">
+              <img src={exampleQr} alt="QR code for the biosample decoded in the phone screenshot" width="232" height="232" loading="lazy" />
+            </a>
+            <figcaption>Scan this example with ClarID-Pocket.</figcaption>
+          </figure>
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionLabel}>Current scope</p>
           <div className={styles.sectionTitleRow}>
             <h2>Supported operations</h2>
-            <p>Implemented for subject and biosample entities in the current release.</p>
           </div>
           <div className={styles.cardGrid}>
             <article className={styles.card}>
               <span>Encode</span>
               <h2>Generate identifiers</h2>
-              <p>Map structured subject and biosample metadata to human or stub formats.</p>
+              <p>Map individual records or bulk CSV metadata to human or stub subject and biosample identifiers.</p>
             </article>
             <article className={styles.card}>
               <span>Decode</span>
@@ -149,18 +153,12 @@ export default function Home(): React.ReactElement {
               <p>Validate codebook structure against the schema before processing data.</p>
             </article>
             <article className={styles.card}>
-              <span>Process</span>
-              <h2>Run table and QR workflows</h2>
-              <p>Process individual records or CSV files and generate or decode QR codes.</p>
+              <span>QR codes</span>
+              <h2>Create and read QR codes</h2>
+              <p>Generate QR-code PNGs from identifier tables or read identifier text back from QR images.</p>
+              <Link to="/usage/quickstart#qr-code-mode">QR-code examples</Link>
             </article>
           </div>
-          <aside className={styles.scopeNote}>
-            <strong>Scope</strong>
-            <p>
-              ClarID complements persistent identifiers and source metadata by carrying
-              selected contextual fields. It is not intended to replace either.
-            </p>
-          </aside>
         </section>
 
         <section className={styles.pathSection}>

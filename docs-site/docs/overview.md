@@ -50,7 +50,8 @@ metadata.
 - Encode subject and biosample identifiers from structured metadata.
 - Decode human-readable or stub identifiers back into tabular values.
 - Validate YAML codebooks against the bundled JSON Schema.
-- Run single-record, bulk CSV, QR-code, and preprocessing workflows from the CLI.
+- Generate QR-code PNGs from identifier tables and read identifier text from QR images. See [QR-code examples](./usage/quickstart.md#qr-code-mode).
+- Run single-record, bulk CSV, and preprocessing workflows from the CLI.
 
 ## Choosing an ID Format
 
